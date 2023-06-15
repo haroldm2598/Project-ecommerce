@@ -1,32 +1,36 @@
-import { useState } from 'react';
-
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import '../assets/styles/main.scss';
+import homePageImg from '../assets/images/homepage.jpg';
 // 'https://fakestoreapi.com/products?limit=4
 export default function Home() {
-	const [count, setCount] = useState(0);
+	const [url, setUrl] = useState('https://fakestoreapi.com/products?limit=4');
 
-	function decrement() {
-		setCount((prevCount) => prevCount - 1);
-	}
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await axios.get(url);
+				console.log(response.data);
+			} catch (e) {
+				console.log(e);
+			}
+		};
 
-	function increment() {
-		setCount((prevCount) => prevCount + 1);
-	}
-	const styles = {
-		button:
-			'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-	};
+		fetchData();
+	}, [url]);
 
 	return (
 		<>
-			<section>
-				<h1>Welcome to Home page as default</h1>
-				<h3>{count}</h3>
-				<button className={`mx-5 ${styles.button}`} onClick={decrement}>
-					Decrement
-				</button>
-				<button className={styles.button} onClick={increment}>
-					Increment
-				</button>
+			<section className='h-screen px-10 py-14 bg-slate-500 homeContainer'>
+				<div className='flex flex-row'>
+					<div>
+						<h1>An exclusive and unique brands</h1>
+						<button>shop now</button>
+					</div>
+					<div className=' w-96'>
+						<img src={homePageImg} alt='homepage image' />
+					</div>
+				</div>
 			</section>
 		</>
 	);
