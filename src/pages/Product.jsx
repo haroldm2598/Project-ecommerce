@@ -1,4 +1,4 @@
-// 'https://fakestoreapi.com/products?limit=5
+// 'https://fakestoreapi.com/products?limit=12
 export default function Product() {
 	return (
 		<>
