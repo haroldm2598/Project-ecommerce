@@ -1,5 +1,5 @@
 import '../assets/styles/main.scss';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 
 export default function RootLayout() {
@@ -7,7 +7,10 @@ export default function RootLayout() {
 		<div className='rootLayout'>
 			<header>
 				<nav className='h-20 px-10 flex flex-wrap flex-row justify-between items-center font-bold '>
-					<h1 className='grow shrink text-4xl'>FakeStore</h1>
+					<h1 className='grow shrink text-4xl'>
+						<Link to='/'>FakeStore</Link>
+					</h1>
+
 					<div className='grow shrink basis-96 '>
 						<NavLink to='/' className='ml-10'>
 							Home

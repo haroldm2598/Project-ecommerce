@@ -3,15 +3,18 @@ import axios from 'axios';
 import '../assets/styles/main.scss';
 import homePageImg from '../assets/images/homepage.jpg';
 import Card from '../components/Card';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
-	const [url, setUrl] = useState('https://fakestoreapi.com/products?limit=4');
+	// const [url, setUrl] = useState('https://fakestoreapi.com/products?limit=4');
 	const [fakeStoreData, setFakeStoreData] = useState([]);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await axios.get(url);
+				const response = await axios.get(
+					'https://fakestoreapi.com/products?limit=4'
+				);
 				setFakeStoreData(response.data);
 			} catch (e) {
 				console.log(e);
@@ -19,7 +22,7 @@ export default function Home() {
 		};
 
 		fetchData();
-	}, [url]);
+	});
 
 	const fakeStoreDataMap = fakeStoreData.map((item) => (
 		<Card
@@ -32,15 +35,17 @@ export default function Home() {
 
 	return (
 		<>
-			<section className='h-auto px-10 py-14 bg-slate-500 homeContainer'>
+			<section className='h-auto px-10 py-14 homeContainer'>
 				<div className='flex flex-row justify-center items-center'>
 					<div className='grow shrink basis-auto w-56 text-center'>
 						<h1 className='mb-6 px-10 text-6xl font-semibold'>
 							An exclusive and unique brands
 						</h1>
-						<button className='px-20 py-2 bg-redOrange hover:bg-redOrangeDark text-white font-semibold rounded-md '>
-							shop now
-						</button>
+						<Link to='/Product'>
+							<button className='px-20 py-2 bg-redOrange hover:bg-redOrangeDark text-white font-semibold rounded-md transition duration-200 ease-out hover:ease-in'>
+								shop now
+							</button>
+						</Link>
 					</div>
 					<div className='grow shrink basis-auto w-64 h-96 mx-5 rounded-2xl overflow-hidden'>
 						<img
@@ -50,18 +55,9 @@ export default function Home() {
 						/>
 					</div>
 				</div>
-
-				{/* 
-				FEATURES SECTION 
-				- set some useState
-				- set new Map() for remove duplicates
-				- image only
-				- use component name it as Card
-				
-				*/}
 				<div className='featureContainer mt-20'>
 					<h1 className='text-4xl font-semibold'>Features</h1>
-					<div className='my-10 flex  justify-center gap-10'>
+					<div className='my-10 grid grid-cols-4 gap-10'>
 						{fakeStoreDataMap}
 					</div>
 				</div>
