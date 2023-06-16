@@ -11,9 +11,16 @@ body {
 }
 
 .navbarCart {
+	height: 45px;
+	width: 45px;
+	display: inline-block;
 	background-color: $semiLight-color;
-	width: 10px;
-	border-radius: 100%;
+	border-radius: 50%;
+
+	&__cart {
+		margin: 10px;
+		cursor: pointer;
+	}
 }
 
 .homeContainer {

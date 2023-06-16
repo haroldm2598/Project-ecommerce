@@ -1,11 +1,11 @@
 import '../assets/styles/main.scss';
 import { NavLink, Outlet } from 'react-router-dom';
+import { FaShoppingCart } from 'react-icons/fa';
 
 export default function RootLayout() {
 	return (
 		<div className='rootLayout'>
 			<header>
-				{/* border-b-4 */}
 				<nav className='h-20 px-10 flex flex-wrap flex-row justify-between items-center font-bold '>
 					<h1 className='grow shrink text-4xl'>FakeStore</h1>
 					<div className='grow shrink basis-96 '>
@@ -19,7 +19,11 @@ export default function RootLayout() {
 							Contact
 						</NavLink>
 					</div>
-					<div className='grow shrink text-center navbarCart'>Cart</div>
+					<div className='grow shrink text-center'>
+						<span className='navbarCart'>
+							<FaShoppingCart className='navbarCart__cart' />
+						</span>
+					</div>
 				</nav>
 			</header>
 			<main>
