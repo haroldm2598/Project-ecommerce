@@ -1,15 +1,12 @@
 import '../assets/styles/main.scss';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
+import { useState } from 'react';
 
 export default function RootLayout() {
-	function handleClick() {
-		console.log('Cart pop up!!!');
-		return (
-			<div className='w-80 h-3/5 bg-lightBlue absolute top-0 right-0'>
-				asdfasdf
-			</div>
-		);
+	const [isShow, setIsShow] = useState(false);
+	function handleShow() {
+		setIsShow(!isShow);
 	}
 
 	return (
@@ -32,11 +29,19 @@ export default function RootLayout() {
 						</NavLink>
 					</div>
 					<div className='grow shrink text-center'>
-						<span className='navbarCart' onClick={handleClick}>
+						<span className='navbarCart' onClick={handleShow}>
 							<FaShoppingCart className='navbarCart__cart' />
 						</span>
 					</div>
 				</nav>
+				{/* min-w-[20rem] min-h-[60rem] */}
+				<div
+					className={`${
+						isShow ? 'cartActive' : 'cartInActive'
+					}   bg-darkBlue text-white `}
+				>
+					<h1>Testing Cart Center</h1>
+				</div>
 			</header>
 
 			<main>
