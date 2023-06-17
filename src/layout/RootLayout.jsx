@@ -3,6 +3,15 @@ import { Link, NavLink, Outlet } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 
 export default function RootLayout() {
+	function handleClick() {
+		console.log('Cart pop up!!!');
+		return (
+			<div className='w-80 h-3/5 bg-lightBlue absolute top-0 right-0'>
+				asdfasdf
+			</div>
+		);
+	}
+
 	return (
 		<div className='rootLayout'>
 			<header>
@@ -23,12 +32,13 @@ export default function RootLayout() {
 						</NavLink>
 					</div>
 					<div className='grow shrink text-center'>
-						<span className='navbarCart'>
+						<span className='navbarCart' onClick={handleClick}>
 							<FaShoppingCart className='navbarCart__cart' />
 						</span>
 					</div>
 				</nav>
 			</header>
+
 			<main>
 				<Outlet />
 			</main>

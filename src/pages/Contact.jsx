@@ -1,4 +1,5 @@
 import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
+// import { Link } from 'react-router-dom';
 
 export default function Contact() {
 	return (
@@ -16,13 +17,13 @@ export default function Contact() {
 					</p>
 				</div>
 			</section>
-			<section className='h-96 px-20 py-14 bg-lightGray grid justify-center'>
-				<div className='flex flex-row justify-around items-center'>
+			<section className='h-96 px-20 py-14 bg-lightGray grid justify-center items-center'>
+				<div className='flex flex-row gap-20'>
 					<FaGithub size={70} />
 					<FaInstagram size={70} />
 					<FaLinkedin size={70} />
 				</div>
-				<div className='text-2xl'>
+				<div className='mx-auto text-3xl font-semibold tracking-widest'>
 					<p>3736 Briarhill Lane</p>
 					<p>614-531-4419</p>
 				</div>

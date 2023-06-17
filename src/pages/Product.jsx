@@ -10,6 +10,7 @@ export default function Product() {
 		'https://fakestoreapi.com/products?limit=12'
 	);
 	const [productData, setProductData] = useState([]);
+	const [productTarget, setProductTarget] = useState([]);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -24,7 +25,9 @@ export default function Product() {
 		fetchData();
 	}, [currentUrl]);
 
-	console.log(productData);
+	function getProductTarget(image, title, price) {
+		setProductTarget([image, title, price]);
+	}
 
 	const productDataMap = productData.map((item) => (
 		<Card
@@ -32,13 +35,15 @@ export default function Product() {
 			image={item.image}
 			title={item.title}
 			price={item.price}
+			getProductTarget={getProductTarget}
 		/>
 	));
+
 	return (
 		<>
 			<section className='h-auto px-10 py-14 productContainer'>
 				<h1 className='text-4xl font-semibold'>Product</h1>
-				<div className='my-10 grid grid-cols-4 auto-rows-auto gap-10 justify-items-center'>
+				<div className='my-10 grid grid-cols-3 auto-rows-auto gap-10 justify-items-center'>
 					{productDataMap}
 				</div>
 			</section>

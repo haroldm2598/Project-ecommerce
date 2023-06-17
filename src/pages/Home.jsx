@@ -25,12 +25,7 @@ export default function Home() {
 	});
 
 	const fakeStoreDataMap = fakeStoreData.map((item) => (
-		<Card
-			key={item.id}
-			image={item.image}
-			title={item.title}
-			price={item.price}
-		/>
+		<Card key={item.id} image={item.image} />
 	));
 
 	return (
