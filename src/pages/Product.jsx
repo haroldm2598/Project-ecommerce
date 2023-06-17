@@ -26,8 +26,10 @@ export default function Product() {
 	}, [currentUrl]);
 
 	function getProductTarget(image, title, price) {
-		setProductTarget([image, title, price]);
+		setProductTarget((oldItem) => [...oldItem, { image, title, price }]);
 	}
+
+	console.log(productTarget);
 
 	const productDataMap = productData.map((item) => (
 		<Card

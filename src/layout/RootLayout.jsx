@@ -2,6 +2,8 @@ import '../assets/styles/main.scss';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 import { useState } from 'react';
+import CartContainer from '../components/CartContainer';
+import Card from '../components/Card';
 
 export default function RootLayout() {
 	const [isShow, setIsShow] = useState(false);
@@ -34,14 +36,10 @@ export default function RootLayout() {
 						</span>
 					</div>
 				</nav>
-				{/* min-w-[20rem] min-h-[60rem] */}
-				<div
-					className={`${
-						isShow ? 'cartActive' : 'cartInActive'
-					}   bg-darkBlue text-white `}
-				>
-					<h1>Testing Cart Center</h1>
-				</div>
+
+				<CartContainer isShow={isShow}>
+					<Card />
+				</CartContainer>
 			</header>
 
 			<main>
