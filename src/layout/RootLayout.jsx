@@ -11,6 +11,11 @@ export default function RootLayout() {
 		setIsShow(!isShow);
 	}
 
+	// function handleHide(e) {
+	// 	if (e.target) setIsShow(false);
+	// 	console.log(isShow);
+	// }
+
 	return (
 		<div className='rootLayout'>
 			<header>

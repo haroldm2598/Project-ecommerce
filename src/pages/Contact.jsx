@@ -1,6 +1,10 @@
 import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
 // import { Link } from 'react-router-dom';
 
+/*
+ - Use unDraw.co raw sketch in order to maximize design
+*/
+
 export default function Contact() {
 	return (
 		<>

@@ -5,6 +5,16 @@ import '../assets/styles/main.scss';
 import Card from '../components/Card';
 import axios from 'axios';
 
+/*
+	Challenge for the Product
+	- Try to use image transform scale in order to fix zoom in issue for the image cards
+
+	Possible Solution 
+	- for the transferring the ProductTargetData to RootLayout is useContext 
+	OR
+	- create custom hook where to save the array target then import it to the page/component needs 
+*/
+
 export default function Product() {
 	const [currentUrl, setCurrentUrl] = useState(
 		'https://fakestoreapi.com/products?limit=12'
