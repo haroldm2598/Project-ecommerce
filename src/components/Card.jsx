@@ -8,7 +8,7 @@ export default function Card({ image, title, price, getProductTarget }) {
 				<img
 					src={image}
 					alt='homepage image'
-					className='w-full h-64 object-cover'
+					className='w-full h-72 object-cover'
 				/>
 				{title && price && (
 					<div className='p-2 h-36'>

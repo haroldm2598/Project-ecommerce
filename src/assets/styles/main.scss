@@ -5,6 +5,7 @@
 @import './colors';
 
 @layer components {
+	// min-h-[5rem]
 	.card {
 		@apply bg-lightBlue text-white w-80 min-h-[5rem] shadow-lg rounded-md overflow-hidden;
 	}

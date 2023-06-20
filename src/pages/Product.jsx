@@ -8,6 +8,9 @@ import axios from 'axios';
 /*
 	Challenge for the Product
 	- Try to use image transform scale in order to fix zoom in issue for the image cards
+	- Remove all the logic board from Product and transfer it to App
+	- Only the productData will be left 
+	- Use it as a Props to pass it from App
 
 	Possible Solution 
 	- for the transferring the ProductTargetData to RootLayout is useContext 
