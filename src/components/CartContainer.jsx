@@ -12,7 +12,7 @@ function CartContainer({ isShow, children }) {
 		<div
 			className={`${
 				isShow ? 'cartActive' : 'cartInActive'
-			} px-20 py-10 bg-darkBlue text-white`}
+			} px-20 py-20 bg-darkBlue text-white flex flex-col gap-y-10`}
 		>
 			<h1>Testing Cart Center</h1>
 			{children}

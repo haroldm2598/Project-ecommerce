@@ -15,12 +15,14 @@ export default function Card({ image, title, price, getProductTarget }) {
 						<h3 className='text-xl font-medium'>{title}</h3>
 						<div className=' flex justify-between items-center'>
 							<p>${price}</p>
-							<span
-								className=' cursor-pointer'
-								onClick={() => getProductTarget(image, title, price)}
-							>
-								<FaShoppingCart />
-							</span>
+							{getProductTarget && (
+								<span
+									className=' cursor-pointer'
+									onClick={() => getProductTarget(image, title, price)}
+								>
+									<FaShoppingCart />
+								</span>
+							)}
 						</div>
 					</div>
 				)}

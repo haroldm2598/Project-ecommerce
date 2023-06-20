@@ -1,9 +1,9 @@
 // 'https://fakestoreapi.com/products?limit=12'
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import '../assets/styles/main.scss';
 
 import Card from '../components/Card';
-import axios from 'axios';
+// import axios from 'axios';
 
 /*
 	Challenge for the Product
@@ -18,31 +18,31 @@ import axios from 'axios';
 	- create custom hook where to save the array target then import it to the page/component needs 
 */
 
-export default function Product() {
-	const [currentUrl, setCurrentUrl] = useState(
-		'https://fakestoreapi.com/products?limit=12'
-	);
-	const [productData, setProductData] = useState([]);
-	const [productTarget, setProductTarget] = useState([]);
+export default function Product({ productData, getProductTarget }) {
+	// const [currentUrl, setCurrentUrl] = useState(
+	// 	'https://fakestoreapi.com/products?limit=12'
+	// );
+	// const [productData, setProductData] = useState([]);
+	// const [productTarget, setProductTarget] = useState([]);
 
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const response = await axios.get(currentUrl);
-				setProductData(response.data);
-			} catch (e) {
-				console.log(e);
-			}
-		};
+	// useEffect(() => {
+	// 	const fetchData = async () => {
+	// 		try {
+	// 			const response = await axios.get(currentUrl);
+	// 			setProductData(response.data);
+	// 		} catch (e) {
+	// 			console.log(e);
+	// 		}
+	// 	};
 
-		fetchData();
-	}, [currentUrl]);
+	// 	fetchData();
+	// }, [currentUrl]);
 
-	function getProductTarget(image, title, price) {
-		setProductTarget((oldItem) => [...oldItem, { image, title, price }]);
-	}
+	// function getProductTarget(image, title, price) {
+	// 	setProductTarget((oldItem) => [...oldItem, { image, title, price }]);
+	// }
 
-	console.log(productTarget);
+	// console.log(productTarget);
 
 	const productDataMap = productData.map((item) => (
 		<Card

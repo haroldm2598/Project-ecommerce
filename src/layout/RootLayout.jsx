@@ -5,7 +5,7 @@ import { useState } from 'react';
 import CartContainer from '../components/CartContainer';
 import Card from '../components/Card';
 
-export default function RootLayout() {
+export default function RootLayout({ productTarget }) {
 	const [isShow, setIsShow] = useState(false);
 	function handleShow() {
 		setIsShow(!isShow);
@@ -15,6 +15,15 @@ export default function RootLayout() {
 	// 	if (e.target) setIsShow(false);
 	// 	console.log(isShow);
 	// }
+
+	const productTargetMap = productTarget.map((item) => (
+		<Card
+			key={item.id}
+			image={item.image}
+			title={item.title}
+			price={item.price}
+		/>
+	));
 
 	return (
 		<div className='rootLayout'>
@@ -42,9 +51,7 @@ export default function RootLayout() {
 					</div>
 				</nav>
 
-				<CartContainer isShow={isShow}>
-					<Card />
-				</CartContainer>
+				<CartContainer isShow={isShow}>{productTargetMap}</CartContainer>
 			</header>
 
 			<main>
