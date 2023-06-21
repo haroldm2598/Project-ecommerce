@@ -17,24 +17,26 @@ import Contact from './pages/Contact';
 import RootLayout from './layout/RootLayout';
 
 function App() {
-	const [currentUrl, setCurrentUrl] = useState(
-		'https://fakestoreapi.com/products?limit=12'
-	);
+	// const [currentUrl, setCurrentUrl] = useState(
+	// 	'https://fakestoreapi.com/products?limit=12'
+	// );
 	const [productData, setProductData] = useState([]);
 	const [productTarget, setProductTarget] = useState([]);
 
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const response = await axios.get(currentUrl);
-				setProductData(response.data);
-			} catch (e) {
-				console.log(e);
-			}
-		};
+	const fetchData = async () => {
+		try {
+			const response = await axios.get(
+				'https://fakestoreapi.com/products?limit=12'
+			);
+			setProductData(response.data);
+		} catch (e) {
+			console.log(e);
+		}
+	};
 
+	useEffect(() => {
 		fetchData();
-	}, [currentUrl]);
+	}, []);
 
 	function getProductTarget(image, title, price) {
 		setProductTarget((oldItem) => [...oldItem, { image, title, price }]);

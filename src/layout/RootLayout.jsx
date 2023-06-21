@@ -16,13 +16,8 @@ export default function RootLayout({ productTarget }) {
 	// 	console.log(isShow);
 	// }
 
-	const productTargetMap = productTarget.map((item) => (
-		<Card
-			key={item.id}
-			image={item.image}
-			title={item.title}
-			price={item.price}
-		/>
+	const productTargetMap = productTarget.map((item, id) => (
+		<Card key={id} image={item.image} title={item.title} price={item.price} />
 	));
 
 	return (
