@@ -1,6 +1,6 @@
 import '../assets/styles/main.scss';
 /*
-    - how can i pass the data coming from Product Page then to CartContainer
+   DONE - how can i pass the data coming from Product Page then to CartContainer
     - Add increment and decrement button
     - useState must use in button
     - Array.reduce inorder to total the amount purchase

@@ -1,23 +1,44 @@
 import '../assets/styles/main.scss';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import CartContainer from '../components/CartContainer';
 import Card from '../components/Card';
 
+let useClickOutside = (handler) => {
+	const cartRef = useRef();
+
+	useEffect(() => {
+		const cartEvent = (e) => {
+			if (!cartRef.current.contains(event.target)) {
+				handler();
+			}
+		};
+		document.body.addEventListener('click', cartEvent);
+
+		return () => document.body.removeEventListener('click', cartEvent);
+	});
+
+	return cartRef;
+};
+
 export default function RootLayout({ productTarget }) {
 	const [isShow, setIsShow] = useState(false);
+	const [currentCount, setCurrentCount] = useState(0);
+	const cartRef = useClickOutside(() => setIsShow(false));
+
 	function handleShow() {
-		setIsShow(!isShow);
+		setIsShow((oldState) => !oldState);
 	}
 
-	// function handleHide(e) {
-	// 	if (e.target) setIsShow(false);
-	// 	console.log(isShow);
-	// }
-
 	const productTargetMap = productTarget.map((item, id) => (
-		<Card key={id} image={item.image} title={item.title} price={item.price} />
+		<Card
+			key={id}
+			image={item.image}
+			title={item.title}
+			price={item.price}
+			quantity={currentCount}
+		/>
 	));
 
 	return (
@@ -39,14 +60,13 @@ export default function RootLayout({ productTarget }) {
 							Contact
 						</NavLink>
 					</div>
-					<div className='grow shrink text-center'>
+					<div className='grow shrink text-center' ref={cartRef}>
 						<span className='navbarCart' onClick={handleShow}>
 							<FaShoppingCart className='navbarCart__cart' />
 						</span>
+						<CartContainer isShow={isShow}>{productTargetMap}</CartContainer>
 					</div>
 				</nav>
-
-				<CartContainer isShow={isShow}>{productTargetMap}</CartContainer>
 			</header>
 
 			<main>
