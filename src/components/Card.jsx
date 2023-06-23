@@ -12,10 +12,23 @@ export default function Card({
 }) {
 	const [currentPrice, setCurrentPrice] = useState(price);
 
-	// function handlePrice() {
-	// 	setCurrentPrice()
-	// }
-	console.log(currentPrice);
+	function decrementPrice() {
+		setCurrentCount((oldCount) => {
+			if (oldCount <= 1) {
+				return (oldCount = 1);
+			} else {
+				return oldCount - 1;
+			}
+		});
+		setCurrentPrice((oldPrice) => {
+			return currentCount <= 1 ? oldPrice : oldPrice - price;
+		});
+	}
+
+	function IncrementPrice() {
+		setCurrentCount((oldCount) => oldCount + 1);
+		setCurrentPrice((oldPrice) => oldPrice + price);
+	}
 
 	return (
 		<>
@@ -29,7 +42,7 @@ export default function Card({
 					<div className='p-2 h-36'>
 						<h3 className='text-xl font-medium'>{title}</h3>
 						<div className=' flex justify-between items-center'>
-							<p>${price}</p>
+							<p>${currentPrice.toFixed(2)}</p>
 							{getProductTarget && (
 								<span
 									className=' cursor-pointer'
@@ -41,25 +54,9 @@ export default function Card({
 
 							{currentCount && (
 								<>
-									<button
-										onClick={() =>
-											setCurrentCount((oldCount) => {
-												if (oldCount <= 1) {
-													return (oldCount = 1);
-												} else {
-													return oldCount - 1;
-												}
-											})
-										}
-									>
-										-
-									</button>
+									<button onClick={decrementPrice}>-</button>
 									<h3>{currentCount}</h3>
-									<button
-										onClick={() => setCurrentCount((oldCount) => oldCount + 1)}
-									>
-										+
-									</button>
+									<button onClick={IncrementPrice}>+</button>
 								</>
 							)}
 						</div>
