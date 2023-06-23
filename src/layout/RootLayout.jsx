@@ -24,7 +24,7 @@ let useClickOutside = (handler) => {
 
 export default function RootLayout({ productTarget }) {
 	const [isShow, setIsShow] = useState(false);
-	const [currentCount, setCurrentCount] = useState(0);
+	const [currentCount, setCurrentCount] = useState(1);
 	const cartRef = useClickOutside(() => setIsShow(false));
 
 	function handleShow() {
@@ -37,7 +37,8 @@ export default function RootLayout({ productTarget }) {
 			image={item.image}
 			title={item.title}
 			price={item.price}
-			quantity={currentCount}
+			currentCount={currentCount}
+			setCurrentCount={setCurrentCount}
 		/>
 	));
 

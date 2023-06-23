@@ -58,7 +58,7 @@ export default function Product({ productData, getProductTarget }) {
 		<>
 			<section className='h-auto px-10 py-14 productContainer'>
 				<h1 className='text-4xl font-semibold'>Product</h1>
-				<div className='my-10 grid grid-cols-3 auto-rows-auto gap-10 justify-items-center'>
+				<div className='mx-auto my-10 max-w-[80rem] grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-auto gap-10 justify-items-center'>
 					{productDataMap}
 				</div>
 			</section>
