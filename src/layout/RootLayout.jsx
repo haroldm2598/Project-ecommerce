@@ -1,35 +1,33 @@
 import '../assets/styles/main.scss';
+
+import { useState } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
-import { useEffect, useRef, useState } from 'react';
+
+// COMPONENTS
 import CartContainer from '../components/CartContainer';
 import Card from '../components/Card';
 
-let useClickOutside = (handler) => {
-	const cartRef = useRef();
-
-	useEffect(() => {
-		const cartEvent = (event) => {
-			if (!cartRef.current.contains(event.target)) {
-				handler();
-			}
-		};
-		document.body.addEventListener('click', cartEvent);
-
-		return () => document.body.removeEventListener('click', cartEvent);
-	});
-
-	return cartRef;
-};
+// HOOKS
+import useClickOutside from '../hooks/useClickOutside';
 
 export default function RootLayout({ productTarget }) {
+	const productTotalPrice = productTarget.map((item) => item.price);
+
 	const [isShow, setIsShow] = useState(false);
-	// const [currentCount, setCurrentCount] = useState(1);
+	const [totalPrice, setTotalPrice] = useState(productTotalPrice);
+
 	const cartRef = useClickOutside(() => setIsShow(false));
 
 	function handleShow() {
 		setIsShow((oldState) => !oldState);
 	}
+
+	// function setTotalPriceAmount() {
+	// 	setTotalPrice(productTotalPrice);
+	// }
+
+	// setTotalPriceAmount;
 
 	const productTargetMap = productTarget.map((item, id) => (
 		<Card
@@ -38,8 +36,6 @@ export default function RootLayout({ productTarget }) {
 			title={item.title}
 			price={item.price}
 			isCount={true}
-			// currentCount={currentCount}
-			// setCurrentCount={setCurrentCount}
 		/>
 	));
 
@@ -67,7 +63,9 @@ export default function RootLayout({ productTarget }) {
 						<span className='navbarCart' onClick={handleShow}>
 							<FaShoppingCart className='navbarCart__cart' />
 						</span>
-						<CartContainer isShow={isShow}>{productTargetMap}</CartContainer>
+						<CartContainer isShow={isShow} totalPrice={totalPrice}>
+							{productTargetMap}
+						</CartContainer>
 					</div>
 				</nav>
 				{/* Background overlay for cart */}

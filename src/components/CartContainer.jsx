@@ -1,4 +1,5 @@
 import '../assets/styles/main.scss';
+// import { useState } from 'react';
 /*
    DONE - how can i pass the data coming from Product Page then to CartContainer
    DONE - Add increment and decrement button
@@ -7,7 +8,11 @@ import '../assets/styles/main.scss';
     - make condition if already in the cart then remove the duplicate
 */
 
-function CartContainer({ isShow, children }) {
+function CartContainer({ isShow, totalPrice, children }) {
+	// const [totalPrice, setTotalPrice] = useState(productTotalPrice);
+
+	console.log(totalPrice);
+
 	return (
 		<div
 			className={`${
