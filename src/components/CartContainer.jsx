@@ -1,9 +1,9 @@
 import '../assets/styles/main.scss';
 /*
    DONE - how can i pass the data coming from Product Page then to CartContainer
-    - Add increment and decrement button
-    - useState must use in button
-    - Array.reduce inorder to total the amount purchase
+   DONE - Add increment and decrement button
+   DONE - useState must use in button
+   PROCESSING - Array.reduce inorder to total the amount purchase
     - make condition if already in the cart then remove the duplicate
 */
 

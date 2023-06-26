@@ -7,9 +7,9 @@ export default function Card({
 	title,
 	price,
 	getProductTarget,
-	currentCount,
-	setCurrentCount
+	isCount
 }) {
+	const [currentCount, setCurrentCount] = useState(1);
 	const [currentPrice, setCurrentPrice] = useState(price);
 
 	function decrementPrice() {
@@ -52,7 +52,7 @@ export default function Card({
 								</span>
 							)}
 
-							{currentCount && (
+							{isCount && (
 								<>
 									<button onClick={decrementPrice}>-</button>
 									<h3>{currentCount}</h3>

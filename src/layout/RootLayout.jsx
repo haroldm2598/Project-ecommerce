@@ -9,7 +9,7 @@ let useClickOutside = (handler) => {
 	const cartRef = useRef();
 
 	useEffect(() => {
-		const cartEvent = (e) => {
+		const cartEvent = (event) => {
 			if (!cartRef.current.contains(event.target)) {
 				handler();
 			}
@@ -24,7 +24,7 @@ let useClickOutside = (handler) => {
 
 export default function RootLayout({ productTarget }) {
 	const [isShow, setIsShow] = useState(false);
-	const [currentCount, setCurrentCount] = useState(1);
+	// const [currentCount, setCurrentCount] = useState(1);
 	const cartRef = useClickOutside(() => setIsShow(false));
 
 	function handleShow() {
@@ -37,8 +37,9 @@ export default function RootLayout({ productTarget }) {
 			image={item.image}
 			title={item.title}
 			price={item.price}
-			currentCount={currentCount}
-			setCurrentCount={setCurrentCount}
+			isCount={true}
+			// currentCount={currentCount}
+			// setCurrentCount={setCurrentCount}
 		/>
 	));
 
@@ -61,6 +62,7 @@ export default function RootLayout({ productTarget }) {
 							Contact
 						</NavLink>
 					</div>
+
 					<div className='grow shrink text-center' ref={cartRef}>
 						<span className='navbarCart' onClick={handleShow}>
 							<FaShoppingCart className='navbarCart__cart' />
@@ -68,6 +70,8 @@ export default function RootLayout({ productTarget }) {
 						<CartContainer isShow={isShow}>{productTargetMap}</CartContainer>
 					</div>
 				</nav>
+				{/* Background overlay for cart */}
+				{/* <div className=' bg-redOrange/50 w-full h-screen fixed'></div> */}
 			</header>
 
 			<main>
