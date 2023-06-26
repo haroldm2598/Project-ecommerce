@@ -12,23 +12,15 @@ import Card from '../components/Card';
 import useClickOutside from '../hooks/useClickOutside';
 
 export default function RootLayout({ productTarget }) {
-	const productTotalPrice = productTarget.map((item) => item.price);
-
 	const [isShow, setIsShow] = useState(false);
-	const [totalPrice, setTotalPrice] = useState(productTotalPrice);
-
 	const cartRef = useClickOutside(() => setIsShow(false));
+	// const [totalPrice, setTotalPrice] = useState(productTotalPrice);
 
 	function handleShow() {
 		setIsShow((oldState) => !oldState);
 	}
 
-	// function setTotalPriceAmount() {
-	// 	setTotalPrice(productTotalPrice);
-	// }
-
-	// setTotalPriceAmount;
-
+	const productTotalPrice = productTarget.map((item) => item.price);
 	const productTargetMap = productTarget.map((item, id) => (
 		<Card
 			key={id}
@@ -63,7 +55,10 @@ export default function RootLayout({ productTarget }) {
 						<span className='navbarCart' onClick={handleShow}>
 							<FaShoppingCart className='navbarCart__cart' />
 						</span>
-						<CartContainer isShow={isShow} totalPrice={totalPrice}>
+						<CartContainer
+							isShow={isShow}
+							productTotalPrice={productTotalPrice}
+						>
 							{productTargetMap}
 						</CartContainer>
 					</div>

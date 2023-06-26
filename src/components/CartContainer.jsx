@@ -1,5 +1,5 @@
 import '../assets/styles/main.scss';
-// import { useState } from 'react';
+import { useState } from 'react';
 /*
    DONE - how can i pass the data coming from Product Page then to CartContainer
    DONE - Add increment and decrement button
@@ -8,10 +8,12 @@ import '../assets/styles/main.scss';
     - make condition if already in the cart then remove the duplicate
 */
 
-function CartContainer({ isShow, totalPrice, children }) {
-	// const [totalPrice, setTotalPrice] = useState(productTotalPrice);
+function CartContainer({ isShow, productTotalPrice, children }) {
+	const [totalPrice, setTotalPrice] = useState(productTotalPrice);
 
-	console.log(totalPrice);
+	function updateTotalAmount() {
+		setTotalPrice((oldTotal) => oldTotal + productTotalPrice);
+	}
 
 	return (
 		<div
@@ -28,7 +30,7 @@ function CartContainer({ isShow, totalPrice, children }) {
 					<div className='grid grid-cols-1 grid-rows-2'>
 						<div className='flex justify-between'>
 							<h3>Total Amount</h3>
-							<h3>Price</h3>
+							<h3 onChange={updateTotalAmount}>{totalPrice}</h3>
 						</div>
 						<button className='btn'>Checkout</button>
 					</div>
