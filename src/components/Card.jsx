@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import '../assets/styles/main.scss';
 import { FaShoppingCart } from 'react-icons/fa';
+
+import '../assets/styles/main.scss';
 
 export default function Card({
 	image,
@@ -36,11 +37,11 @@ export default function Card({
 				<img
 					src={image}
 					alt='homepage image'
-					className='cardImage w-full h-96'
+					className='w-full h-96 object-cover object-top'
 				/>
 				{title && price && (
-					<div className='p-2 h-36'>
-						<h3 className='text-xl font-medium'>{title}</h3>
+					<div className='p-4 h-36 flex flex-col'>
+						<h3 className='flex-1 text-base font-medium'>{title}</h3>
 						<div className=' flex justify-between items-center'>
 							<p>${currentPrice.toFixed(2)}</p>
 							{getProductTarget && (

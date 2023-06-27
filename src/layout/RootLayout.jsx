@@ -13,8 +13,8 @@ import useClickOutside from '../hooks/useClickOutside';
 
 export default function RootLayout({ productTarget }) {
 	const [isShow, setIsShow] = useState(false);
+	const [totalPrice, setTotalPrice] = useState(0);
 	const cartRef = useClickOutside(() => setIsShow(false));
-	// const [totalPrice, setTotalPrice] = useState(productTotalPrice);
 
 	function handleShow() {
 		setIsShow((oldState) => !oldState);
@@ -30,6 +30,8 @@ export default function RootLayout({ productTarget }) {
 			isCount={true}
 		/>
 	));
+
+	console.log(productTotalPrice);
 
 	return (
 		<div className='rootLayout'>
@@ -58,6 +60,8 @@ export default function RootLayout({ productTarget }) {
 						<CartContainer
 							isShow={isShow}
 							productTotalPrice={productTotalPrice}
+							totalPrice={totalPrice}
+							setTotalPrice={setTotalPrice}
 						>
 							{productTargetMap}
 						</CartContainer>
