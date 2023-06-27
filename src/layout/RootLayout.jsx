@@ -12,15 +12,37 @@ import Card from '../components/Card';
 import useClickOutside from '../hooks/useClickOutside';
 
 export default function RootLayout({ productTarget }) {
+	const productTotalPrice = productTarget.map((item) => item.price);
+
 	const [isShow, setIsShow] = useState(false);
 	const [totalPrice, setTotalPrice] = useState(0);
 	const cartRef = useClickOutside(() => setIsShow(false));
+
+	const [currentCount, setCurrentCount] = useState(1);
+	const [currentPrice, setCurrentPrice] = useState(productTotalPrice);
+
+	function decrementPrice() {
+		setCurrentCount((oldCount) => {
+			if (oldCount <= 1) {
+				return (oldCount = 1);
+			} else {
+				return oldCount - 1;
+			}
+		});
+		setCurrentPrice((oldPrice) => {
+			return currentCount <= 1 ? oldPrice : oldPrice - currentPrice;
+		});
+	}
+
+	function IncrementPrice() {
+		setCurrentCount((oldCount) => oldCount + 1);
+		setCurrentPrice((oldPrice) => oldPrice + currentPrice);
+	}
 
 	function handleShow() {
 		setIsShow((oldState) => !oldState);
 	}
 
-	const productTotalPrice = productTarget.map((item) => item.price);
 	const productTargetMap = productTarget.map((item, id) => (
 		<Card
 			key={id}
@@ -28,10 +50,12 @@ export default function RootLayout({ productTarget }) {
 			title={item.title}
 			price={item.price}
 			isCount={true}
+			currentCount={currentCount}
+			currentPrice={currentPrice}
+			decrementPrice={decrementPrice}
+			IncrementPrice={IncrementPrice}
 		/>
 	));
-
-	console.log(productTotalPrice);
 
 	return (
 		<div className='rootLayout'>

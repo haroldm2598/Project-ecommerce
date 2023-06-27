@@ -4,7 +4,10 @@ import '../assets/styles/main.scss';
    DONE - how can i pass the data coming from Product Page then to CartContainer
    DONE - Add increment and decrement button
    DONE - useState must use in button
+   
    PROCESSING - move the logic baord of currentCount and currentPrice inside rootLayout
+   PROCESSING - add new conditional rendering where requesting if price is given then price Product(Card) else currentPrice for CartContainer(Card)  
+   PROCESSING - add maybe new object property of quantity and change it to state
    PROCESSING (almost finish)- Array.reduce inorder to total the amount purchase
 	- in order to achieve the handling event on total amount must insert the usestate in increment and decrement onClick 
     - make condition if already in the cart then remove the duplicate
