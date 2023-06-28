@@ -39,7 +39,10 @@ function App() {
 	}, []);
 
 	function getProductTarget(image, title, price) {
-		setProductTarget((oldItem) => [...oldItem, { image, title, price }]);
+		setProductTarget((oldItem) => [
+			...oldItem,
+			{ image, title, price, quantity: 1 }
+		]);
 	}
 
 	const router = createBrowserRouter(

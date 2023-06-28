@@ -10,7 +10,7 @@ export default function Card({
 	getProductTarget,
 	isCount,
 	currentCount,
-	currentPrice,
+	// currentPrice,
 	decrementPrice,
 	IncrementPrice
 }) {

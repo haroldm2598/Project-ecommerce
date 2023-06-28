@@ -12,14 +12,18 @@ import Card from '../components/Card';
 import useClickOutside from '../hooks/useClickOutside';
 
 export default function RootLayout({ productTarget }) {
+	const productQuantity = productTarget.map((item) => item.quantity);
 	const productTotalPrice = productTarget.map((item) => item.price);
 
 	const [isShow, setIsShow] = useState(false);
 	const [totalPrice, setTotalPrice] = useState(0);
 	const cartRef = useClickOutside(() => setIsShow(false));
 
-	const [currentCount, setCurrentCount] = useState(1);
-	const [currentPrice, setCurrentPrice] = useState(productTotalPrice);
+	const [currentCount, setCurrentCount] = useState(productQuantity || []);
+	const [currentPrice, setCurrentPrice] = useState(productTotalPrice || []);
+
+	console.log(productQuantity);
+	console.log(typeof currentCount);
 
 	function decrementPrice() {
 		setCurrentCount((oldCount) => {
@@ -35,7 +39,7 @@ export default function RootLayout({ productTarget }) {
 	}
 
 	function IncrementPrice() {
-		setCurrentCount((oldCount) => oldCount + 1);
+		setCurrentCount((oldCount) => {...oldCount, [oldCount + 1]});
 		setCurrentPrice((oldPrice) => oldPrice + currentPrice);
 	}
 
