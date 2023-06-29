@@ -17,12 +17,12 @@ export default function RootLayout({ productTarget }) {
 	const [isShow, setIsShow] = useState(false);
 	const cartRef = useClickOutside(() => setIsShow(false));
 
-	const [totalPrice, setTotalPrice] = useState(0);
-	const [currentCount, setCurrentCount] = useState(1);
+	const [currentCount, setCurrentCount] = useState([]);
 	const [currentPrice, setCurrentPrice] = useState(productTotalPrice || []);
+	const [totalPrice, setTotalPrice] = useState(0);
 
 	function decrementPrice(currentProductId) {
-		const countIncrement = productTarget.map((item) => {
+		const currentQuantity = productTarget.map((item) => {
 			if (item.productId === currentProductId) {
 				if (item.quantity <= 1) {
 					return { quantity: 1 };
@@ -33,7 +33,7 @@ export default function RootLayout({ productTarget }) {
 				return item;
 			}
 		});
-		setCurrentCount(countIncrement);
+		setCurrentCount(currentQuantity);
 
 		setCurrentPrice((oldPrice) => {
 			return currentCount <= 1 ? oldPrice : oldPrice - currentPrice;
@@ -41,7 +41,7 @@ export default function RootLayout({ productTarget }) {
 	}
 
 	function IncrementPrice(currentProductId) {
-		const countIncrement = productTarget.map((item) => {
+		const currentQuantity = productTarget.map((item) => {
 			if (item.productId === currentProductId) {
 				return { quantity: item.quantity++ };
 			} else {
@@ -49,17 +49,22 @@ export default function RootLayout({ productTarget }) {
 			}
 		});
 
-		const priceIncrement = productTarget.map((item) => {
-			if (item.productId === currentProductId) {
-				return { price: item.price + item.price };
-			} else {
-				return item;
-			}
-		});
+		setCurrentCount(currentQuantity);
 
-		console.log(priceIncrement);
-		setCurrentCount(countIncrement);
+		// const priceIncrement = productTarget.map((item) => {
+		// 	if (item.productId === currentProductId) {
+		// 		return { price: item.price + item.price };
+		// 	} else {
+		// 		return item;
+		// 	}
+		// });
+
 		setCurrentPrice((oldPrice) => oldPrice + currentPrice);
+		/*
+			setlogic(oldState => oldState + currentObj[i] or currentObj)
+			- as long as getting the index position then only that will change
+
+		*/
 	}
 
 	function handleShow() {
@@ -75,7 +80,6 @@ export default function RootLayout({ productTarget }) {
 			price={item.price}
 			quantity={item.quantity}
 			isCount={true}
-			currentPrice={currentPrice}
 			decrementPrice={decrementPrice}
 			IncrementPrice={IncrementPrice}
 		/>
