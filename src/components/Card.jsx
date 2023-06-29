@@ -4,13 +4,13 @@ import { FaShoppingCart } from 'react-icons/fa';
 import '../assets/styles/main.scss';
 
 export default function Card({
+	productId,
 	image,
 	title,
 	price,
+	quantity,
 	getProductTarget,
 	isCount,
-	currentCount,
-	// currentPrice,
 	decrementPrice,
 	IncrementPrice
 }) {
@@ -59,9 +59,9 @@ export default function Card({
 
 							{isCount && (
 								<>
-									<button onClick={decrementPrice}>-</button>
-									<h3>{currentCount}</h3>
-									<button onClick={IncrementPrice}>+</button>
+									<button onClick={() => decrementPrice(productId)}>-</button>
+									<h3>{quantity}</h3>
+									<button onClick={() => IncrementPrice(productId)}>+</button>
 								</>
 							)}
 						</div>

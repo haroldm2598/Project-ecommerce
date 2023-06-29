@@ -7,6 +7,7 @@ import {
 	RouterProvider
 } from 'react-router-dom';
 import axios from 'axios';
+import { nanoid } from 'nanoid';
 
 // Pages
 import Home from './pages/Home';
@@ -15,6 +16,8 @@ import Contact from './pages/Contact';
 
 // Layout
 import RootLayout from './layout/RootLayout';
+
+const url = 'https://fakestoreapi.com/products?limit=12';
 
 function App() {
 	// const [currentUrl, setCurrentUrl] = useState(
@@ -25,9 +28,7 @@ function App() {
 
 	const fetchData = async () => {
 		try {
-			const response = await axios.get(
-				'https://fakestoreapi.com/products?limit=12'
-			);
+			const response = await axios.get(url);
 			setProductData(response.data);
 		} catch (e) {
 			console.log(e);
@@ -41,7 +42,7 @@ function App() {
 	function getProductTarget(image, title, price) {
 		setProductTarget((oldItem) => [
 			...oldItem,
-			{ image, title, price, quantity: 1 }
+			{ productId: nanoid(), image, title, price, quantity: 1 }
 		]);
 	}
 

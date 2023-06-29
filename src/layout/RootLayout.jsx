@@ -12,34 +12,53 @@ import Card from '../components/Card';
 import useClickOutside from '../hooks/useClickOutside';
 
 export default function RootLayout({ productTarget }) {
-	const productQuantity = productTarget.map((item) => item.quantity);
 	const productTotalPrice = productTarget.map((item) => item.price);
 
 	const [isShow, setIsShow] = useState(false);
-	const [totalPrice, setTotalPrice] = useState(0);
 	const cartRef = useClickOutside(() => setIsShow(false));
 
-	const [currentCount, setCurrentCount] = useState(productQuantity || []);
+	const [totalPrice, setTotalPrice] = useState(0);
+	const [currentCount, setCurrentCount] = useState(1);
 	const [currentPrice, setCurrentPrice] = useState(productTotalPrice || []);
 
-	console.log(productQuantity);
-	console.log(typeof currentCount);
-
-	function decrementPrice() {
-		setCurrentCount((oldCount) => {
-			if (oldCount <= 1) {
-				return (oldCount = 1);
+	function decrementPrice(currentProductId) {
+		const countIncrement = productTarget.map((item) => {
+			if (item.productId === currentProductId) {
+				if (item.quantity <= 1) {
+					return { quantity: 1 };
+				} else {
+					return { quantity: item.quantity-- };
+				}
 			} else {
-				return oldCount - 1;
+				return item;
 			}
 		});
+		setCurrentCount(countIncrement);
+
 		setCurrentPrice((oldPrice) => {
 			return currentCount <= 1 ? oldPrice : oldPrice - currentPrice;
 		});
 	}
 
-	function IncrementPrice() {
-		setCurrentCount((oldCount) => {...oldCount, [oldCount + 1]});
+	function IncrementPrice(currentProductId) {
+		const countIncrement = productTarget.map((item) => {
+			if (item.productId === currentProductId) {
+				return { quantity: item.quantity++ };
+			} else {
+				return item;
+			}
+		});
+
+		const priceIncrement = productTarget.map((item) => {
+			if (item.productId === currentProductId) {
+				return { price: item.price + item.price };
+			} else {
+				return item;
+			}
+		});
+
+		console.log(priceIncrement);
+		setCurrentCount(countIncrement);
 		setCurrentPrice((oldPrice) => oldPrice + currentPrice);
 	}
 
@@ -47,14 +66,15 @@ export default function RootLayout({ productTarget }) {
 		setIsShow((oldState) => !oldState);
 	}
 
-	const productTargetMap = productTarget.map((item, id) => (
+	const productTargetMap = productTarget.map((item) => (
 		<Card
-			key={id}
+			key={item.productId}
+			productId={item.productId}
 			image={item.image}
 			title={item.title}
 			price={item.price}
+			quantity={item.quantity}
 			isCount={true}
-			currentCount={currentCount}
 			currentPrice={currentPrice}
 			decrementPrice={decrementPrice}
 			IncrementPrice={IncrementPrice}
