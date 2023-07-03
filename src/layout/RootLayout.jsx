@@ -12,60 +12,58 @@ import Card from '../components/Card';
 import useClickOutside from '../hooks/useClickOutside';
 
 export default function RootLayout({ productTarget }) {
-	const productTotalPrice = productTarget.map((item) => item.price);
+	const productTotalPrice = productTarget.map((item) => {
+		return item.price;
+	});
 
 	const [isShow, setIsShow] = useState(false);
 	const cartRef = useClickOutside(() => setIsShow(false));
 
-	const [currentCount, setCurrentCount] = useState([]);
-	const [currentPrice, setCurrentPrice] = useState(productTotalPrice || []);
 	const [totalPrice, setTotalPrice] = useState(0);
+	const [currentCount, setCurrentCount] = useState(1);
+	const [currentPrice, setCurrentPrice] = useState(productTotalPrice || []);
 
-	function decrementPrice(currentProductId) {
-		const currentQuantity = productTarget.map((item) => {
-			if (item.productId === currentProductId) {
-				if (item.quantity <= 1) {
-					return { quantity: 1 };
-				} else {
-					return { quantity: item.quantity-- };
-				}
-			} else {
-				return item;
-			}
-		});
-		setCurrentCount(currentQuantity);
+	// const [currentCount, setCurrentCount] = useState([]);
+	// const [currentPrice, setCurrentPrice] = useState(productTotalPrice || []);
 
-		setCurrentPrice((oldPrice) => {
-			return currentCount <= 1 ? oldPrice : oldPrice - currentPrice;
-		});
-	}
+	// function decrementPrice(currentProductId) {
+	// 	const currentQuantity = productTarget.map((item) => {
+	// 		if (item.productId === currentProductId) {
+	// 			if (item.quantity <= 1) {
+	// 				return { quantity: 1 };
+	// 			} else {
+	// 				return { quantity: item.quantity-- };
+	// 			}
+	// 		} else {
+	// 			return item;
+	// 		}
+	// 	});
 
-	function IncrementPrice(currentProductId) {
-		const currentQuantity = productTarget.map((item) => {
-			if (item.productId === currentProductId) {
-				return { quantity: item.quantity++ };
-			} else {
-				return item;
-			}
-		});
+	// 	setCurrentCount(currentQuantity);
+	// 	setCurrentPrice((oldPrice) => {
+	// 		return currentCount <= 1 ? oldPrice : oldPrice - currentPrice;
+	// 	});
+	// }
 
-		setCurrentCount(currentQuantity);
+	// function IncrementPrice(currentProductId) {
+	// 	const currentQuantity = productTarget.map((item) => {
+	// 		if (item.productId === currentProductId) {
+	// 			return { quantity: item.quantity++ };
+	// 		} else {
+	// 			return item;
+	// 		}
+	// 	});
+	// 	const priceIncrement = productTarget.map((item) => {
+	// 		if (item.productId === currentProductId) {
+	// 			return { price: item.price + item.price };
+	// 		} else {
+	// 			return item;
+	// 		}
+	// 	});
 
-		// const priceIncrement = productTarget.map((item) => {
-		// 	if (item.productId === currentProductId) {
-		// 		return { price: item.price + item.price };
-		// 	} else {
-		// 		return item;
-		// 	}
-		// });
-
-		setCurrentPrice((oldPrice) => oldPrice + currentPrice);
-		/*
-			setlogic(oldState => oldState + currentObj[i] or currentObj)
-			- as long as getting the index position then only that will change
-
-		*/
-	}
+	// 	setCurrentCount(currentQuantity);
+	// 	setCurrentPrice((oldPrice) => oldPrice + currentPrice);
+	// }
 
 	function handleShow() {
 		setIsShow((oldState) => !oldState);
@@ -80,8 +78,10 @@ export default function RootLayout({ productTarget }) {
 			price={item.price}
 			quantity={item.quantity}
 			isCount={true}
-			decrementPrice={decrementPrice}
-			IncrementPrice={IncrementPrice}
+			currentPrice={currentPrice}
+			currentCount={currentCount}
+			setCurrentPrice={setCurrentPrice}
+			setCurrentCount={setCurrentCount}
 		/>
 	));
 

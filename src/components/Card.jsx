@@ -11,29 +11,38 @@ export default function Card({
 	quantity,
 	getProductTarget,
 	isCount,
-	decrementPrice,
-	IncrementPrice
+	currentPrice,
+	currentCount,
+	setCurrentPrice,
+	setCurrentCount
 }) {
 	// const [currentCount, setCurrentCount] = useState(1);
 	// const [currentPrice, setCurrentPrice] = useState(price);
 
-	// function decrementPrice() {
-	// 	setCurrentCount((oldCount) => {
-	// 		if (oldCount <= 1) {
-	// 			return (oldCount = 1);
-	// 		} else {
-	// 			return oldCount - 1;
-	// 		}
-	// 	});
-	// 	setCurrentPrice((oldPrice) => {
-	// 		return currentCount <= 1 ? oldPrice : oldPrice - price;
-	// 	});
-	// }
+	function decrementPrice() {
+		setCurrentCount((oldCount) => {
+			if (oldCount <= 1) {
+				return (oldCount = 1);
+			} else {
+				return oldCount - 1;
+			}
+		});
+		setCurrentPrice((oldPrice) => {
+			return currentCount <= 1 ? oldPrice : oldPrice - price;
+		});
+	}
 
-	// function IncrementPrice() {
-	// 	setCurrentCount((oldCount) => oldCount + 1);
-	// 	setCurrentPrice((oldPrice) => oldPrice + price);
-	// }
+	function IncrementPrice() {
+		setCurrentCount((oldCount) => oldCount + 1);
+		setCurrentPrice((oldPrice) => oldPrice + price);
+	}
+
+	/*
+		- Create an function here for increment and decrement
+		- Pass down all the usestate for increment price, quantity and totalPrice for the purchase
+		- If not working then should start create a function where it has parameters for EX: useState(parameters) 
+		- then call it inside the component
+	*/
 
 	return (
 		<>
@@ -43,11 +52,12 @@ export default function Card({
 					alt='homepage image'
 					className='w-full h-96 object-cover object-top'
 				/>
-				{title && price && (
+				{title && (
 					<div className='p-4 h-36 flex flex-col'>
 						<h3 className='flex-1 text-base font-medium'>{title}</h3>
 						<div className=' flex justify-between items-center'>
-							<p>${price}</p>
+							{/* {price ? <p>${price}</p> : <p>${currentPrice}</p>} */}
+							<p>${currentPrice}</p>
 							{getProductTarget && (
 								<span
 									className=' cursor-pointer'
@@ -59,9 +69,9 @@ export default function Card({
 
 							{isCount && (
 								<>
-									<button onClick={() => decrementPrice(productId)}>-</button>
-									<h3>{quantity}</h3>
-									<button onClick={() => IncrementPrice(productId)}>+</button>
+									<button onClick={decrementPrice}>-</button>
+									<h3>{currentCount}</h3>
+									<button onClick={IncrementPrice}>+</button>
 								</>
 							)}
 						</div>
@@ -71,3 +81,9 @@ export default function Card({
 		</>
 	);
 }
+
+// <>
+// 	<button onClick={() => decrementPrice(productId)}>-</button>
+// 	<h3>{quantity}</h3>
+// 	<button onClick={() => IncrementPrice(productId)}>+</button>
+// </>
