@@ -1,23 +1,19 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 
 import '../assets/styles/main.scss';
 
 export default function Card({
-	productId,
+	// productId,
 	image,
 	title,
 	price,
-	quantity,
 	getProductTarget,
 	isCount,
-	currentPrice,
-	currentCount,
-	setCurrentPrice,
-	setCurrentCount
+	getCurrentPrices
 }) {
-	// const [currentCount, setCurrentCount] = useState(1);
-	// const [currentPrice, setCurrentPrice] = useState(price);
+	const [currentCount, setCurrentCount] = useState(1);
+	const [currentPrice, setCurrentPrice] = useState(price);
 
 	function decrementPrice() {
 		setCurrentCount((oldCount) => {
@@ -33,16 +29,10 @@ export default function Card({
 	}
 
 	function IncrementPrice() {
+		console.log(getCurrentPrices(currentPrice));
 		setCurrentCount((oldCount) => oldCount + 1);
 		setCurrentPrice((oldPrice) => oldPrice + price);
 	}
-
-	/*
-		- Create an function here for increment and decrement
-		- Pass down all the usestate for increment price, quantity and totalPrice for the purchase
-		- If not working then should start create a function where it has parameters for EX: useState(parameters) 
-		- then call it inside the component
-	*/
 
 	return (
 		<>
@@ -57,7 +47,7 @@ export default function Card({
 						<h3 className='flex-1 text-base font-medium'>{title}</h3>
 						<div className=' flex justify-between items-center'>
 							{/* {price ? <p>${price}</p> : <p>${currentPrice}</p>} */}
-							<p>${currentPrice}</p>
+							<p>${currentPrice.toFixed(2)}</p>
 							{getProductTarget && (
 								<span
 									className=' cursor-pointer'

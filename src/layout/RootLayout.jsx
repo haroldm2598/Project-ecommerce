@@ -19,9 +19,11 @@ export default function RootLayout({ productTarget }) {
 	const [isShow, setIsShow] = useState(false);
 	const cartRef = useClickOutside(() => setIsShow(false));
 
+	// use a function where get the total prices and send it to props
 	const [totalPrice, setTotalPrice] = useState(0);
-	const [currentCount, setCurrentCount] = useState(1);
-	const [currentPrice, setCurrentPrice] = useState(productTotalPrice || []);
+	function getCurrentPrices(price) {
+		return price;
+	}
 
 	// const [currentCount, setCurrentCount] = useState([]);
 	// const [currentPrice, setCurrentPrice] = useState(productTotalPrice || []);
@@ -78,10 +80,7 @@ export default function RootLayout({ productTarget }) {
 			price={item.price}
 			quantity={item.quantity}
 			isCount={true}
-			currentPrice={currentPrice}
-			currentCount={currentCount}
-			setCurrentPrice={setCurrentPrice}
-			setCurrentCount={setCurrentCount}
+			getCurrentPrices={getCurrentPrices}
 		/>
 	));
 
