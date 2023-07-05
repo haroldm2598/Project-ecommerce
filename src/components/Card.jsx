@@ -3,15 +3,19 @@ import { FaShoppingCart } from 'react-icons/fa';
 
 import '../assets/styles/main.scss';
 
-export default function Card({
-	// productId,
-	image,
-	title,
-	price,
-	getProductTarget,
-	isCount,
-	getCurrentPrices
-}) {
+export default function Card(props) {
+	const {
+		productId,
+		image,
+		title,
+		price,
+		getProductTarget,
+		isCount,
+		totalPrice,
+		setTotalPrice,
+		getCurrentPrices
+	} = props;
+
 	const [currentCount, setCurrentCount] = useState(1);
 	const [currentPrice, setCurrentPrice] = useState(price);
 
@@ -26,12 +30,20 @@ export default function Card({
 		setCurrentPrice((oldPrice) => {
 			return currentCount <= 1 ? oldPrice : oldPrice - price;
 		});
+		// setTotalPrice({
+		// 	...totalPrice,
+		// 	currentPrice
+		// });
 	}
 
 	function IncrementPrice() {
-		console.log(getCurrentPrices(currentPrice));
 		setCurrentCount((oldCount) => oldCount + 1);
 		setCurrentPrice((oldPrice) => oldPrice + price);
+		// setTotalPrice({
+		// 	...totalPrice,
+		// 	currentPrice
+		// });
+		getCurrentPrices(currentPrice, productId);
 	}
 
 	return (

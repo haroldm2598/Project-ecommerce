@@ -12,18 +12,27 @@ import Card from '../components/Card';
 import useClickOutside from '../hooks/useClickOutside';
 
 export default function RootLayout({ productTarget }) {
-	const productTotalPrice = productTarget.map((item) => {
-		return item.price;
-	});
+	// const productTotalPrice = productTarget.map((item) => {
+	// 	return item.price;
+	// });
 
 	const [isShow, setIsShow] = useState(false);
 	const cartRef = useClickOutside(() => setIsShow(false));
 
 	// use a function where get the total prices and send it to props
-	const [totalPrice, setTotalPrice] = useState(0);
-	function getCurrentPrices(price) {
-		return price;
+	// - Then reduce the similar id for the price,
+	// - After that reduce again for the final total
+	const [totalPrice, setTotalPrice] = useState([]);
+
+	function getCurrentPrices(price, currentProductId) {
+		console.log(currentProductId);
+
+		return setTotalPrice((prevPrice) => {
+			return [...prevPrice, { price }];
+		});
 	}
+
+	console.log(totalPrice);
 
 	// const [currentCount, setCurrentCount] = useState([]);
 	// const [currentPrice, setCurrentPrice] = useState(productTotalPrice || []);
@@ -80,6 +89,8 @@ export default function RootLayout({ productTarget }) {
 			price={item.price}
 			quantity={item.quantity}
 			isCount={true}
+			totalPrice={totalPrice}
+			setTotalPrice={setTotalPrice}
 			getCurrentPrices={getCurrentPrices}
 		/>
 	));
@@ -110,7 +121,7 @@ export default function RootLayout({ productTarget }) {
 						</span>
 						<CartContainer
 							isShow={isShow}
-							productTotalPrice={productTotalPrice}
+							// productTotalPrice={productTotalPrice}
 							totalPrice={totalPrice}
 							setTotalPrice={setTotalPrice}
 						>
