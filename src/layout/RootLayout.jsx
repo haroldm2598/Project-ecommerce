@@ -22,39 +22,32 @@ export default function RootLayout({ productTarget }) {
 	// use a function where get the total prices and send it to props
 	// - Then reduce the similar id for the price,
 	// - After that reduce again for the final total
-	const [totalPrice, setTotalPrice] = useState([]);
+	const storeTotalPrice = [];
+	const [totalPrice, setTotalPrice] = useState(storeTotalPrice);
 
 	function getCurrentPrices(price, currentProductId) {
-		console.log(currentProductId);
-
+		storeTotalPrice.push(price);
 		return setTotalPrice((prevPrice) => {
-			return [...prevPrice, { price }];
+			return productTarget.map((item) => {
+				if (item.productId === currentProductId) {
+					// return [{ ...prevPrice, price }];
+					return [item.price, price].reduce((acc, cur) => acc + cur, 0);
+				}
+				// else {
+				// 	return prevPrice;
+				// 	// return [{ ...prevPrice }];
+				// }
+			});
 		});
+
+		// ORIGINAL
+		// return setTotalPrice((prevPrice) => [...prevPrice, { price }]);
 	}
 
 	console.log(totalPrice);
 
 	// const [currentCount, setCurrentCount] = useState([]);
 	// const [currentPrice, setCurrentPrice] = useState(productTotalPrice || []);
-
-	// function decrementPrice(currentProductId) {
-	// 	const currentQuantity = productTarget.map((item) => {
-	// 		if (item.productId === currentProductId) {
-	// 			if (item.quantity <= 1) {
-	// 				return { quantity: 1 };
-	// 			} else {
-	// 				return { quantity: item.quantity-- };
-	// 			}
-	// 		} else {
-	// 			return item;
-	// 		}
-	// 	});
-
-	// 	setCurrentCount(currentQuantity);
-	// 	setCurrentPrice((oldPrice) => {
-	// 		return currentCount <= 1 ? oldPrice : oldPrice - currentPrice;
-	// 	});
-	// }
 
 	// function IncrementPrice(currentProductId) {
 	// 	const currentQuantity = productTarget.map((item) => {
@@ -74,6 +67,25 @@ export default function RootLayout({ productTarget }) {
 
 	// 	setCurrentCount(currentQuantity);
 	// 	setCurrentPrice((oldPrice) => oldPrice + currentPrice);
+	// }
+
+	// function decrementPrice(currentProductId) {
+	// 	const currentQuantity = productTarget.map((item) => {
+	// 		if (item.productId === currentProductId) {
+	// 			if (item.quantity <= 1) {
+	// 				return { quantity: 1 };
+	// 			} else {
+	// 				return { quantity: item.quantity-- };
+	// 			}
+	// 		} else {
+	// 			return item;
+	// 		}
+	// 	});
+
+	// 	setCurrentCount(currentQuantity);
+	// 	setCurrentPrice((oldPrice) => {
+	// 		return currentCount <= 1 ? oldPrice : oldPrice - currentPrice;
+	// 	});
 	// }
 
 	function handleShow() {
