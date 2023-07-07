@@ -11,8 +11,8 @@ export default function Card(props) {
 		price,
 		getProductTarget,
 		isCount,
-		totalPrice,
-		setTotalPrice,
+		// totalPrice,
+		// setTotalPrice,
 		getCurrentPrices
 	} = props;
 

@@ -19,32 +19,42 @@ export default function RootLayout({ productTarget }) {
 	const [isShow, setIsShow] = useState(false);
 	const cartRef = useClickOutside(() => setIsShow(false));
 
-	// use a function where get the total prices and send it to props
-	// - Then reduce the similar id for the price,
-	// - After that reduce again for the final total
 	const storeTotalPrice = [];
-	const [totalPrice, setTotalPrice] = useState(storeTotalPrice);
+	const [totalPrice, setTotalPrice] = useState(storeTotalPrice || []);
+
+	/*
+		remove the duplicate id from array
+		return only the result of new unique array
+	*/
 
 	function getCurrentPrices(price, currentProductId) {
 		storeTotalPrice.push(price);
-		return setTotalPrice((prevPrice) => {
-			return productTarget.map((item) => {
-				if (item.productId === currentProductId) {
-					// return [{ ...prevPrice, price }];
-					return [item.price, price].reduce((acc, cur) => acc + cur, 0);
-				}
-				// else {
-				// 	return prevPrice;
-				// 	// return [{ ...prevPrice }];
-				// }
-			});
-		});
 
-		// ORIGINAL
+		// version 1
 		// return setTotalPrice((prevPrice) => [...prevPrice, { price }]);
-	}
 
-	console.log(totalPrice);
+		// version 2
+		// setTotalPrice((prevPrice) => {
+		// 	return productTarget.map((item) => {
+		// 		if (item.productId === currentProductId) {
+		// 			return [item.price, price].reduce((acc, cur) => acc + cur, 0);
+		// 		} else {
+		// 			return [...prevPrice].filter((item) => typeof item === 'number');
+		// 		}
+		// 	});
+		// });
+		setTotalPrice((oldTotalPrice) => {
+			oldTotalPrice = [...oldTotalPrice, { currentProductId, price }];
+
+			const uniquePrice = oldTotalPrice.filter(
+				(value, index, self) =>
+					index === self.findIndex((t) => t.productId === value.productId)
+			);
+			console.log(uniquePrice);
+
+			// return oldTotalPrice;
+		});
+	}
 
 	// const [currentCount, setCurrentCount] = useState([]);
 	// const [currentPrice, setCurrentPrice] = useState(productTotalPrice || []);
