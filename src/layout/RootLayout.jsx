@@ -20,14 +20,16 @@ export default function RootLayout({ productTarget }) {
 	const cartRef = useClickOutside(() => setIsShow(false));
 
 	const storeTotalPrice = [];
-	const [totalPrice, setTotalPrice] = useState(storeTotalPrice || []);
+	const [totalPrice, setTotalPrice] = useState(storeTotalPrice);
 
 	/*
 		remove the duplicate id from array
 		return only the result of new unique array
+		working but it will only result the first element. 
+		the goal is to get the last array
 	*/
 
-	function getCurrentPrices(price, currentProductId) {
+	function getCurrentPrices(price, productId) {
 		storeTotalPrice.push(price);
 
 		// version 1
@@ -43,16 +45,34 @@ export default function RootLayout({ productTarget }) {
 		// 		}
 		// 	});
 		// });
+
 		setTotalPrice((oldTotalPrice) => {
-			oldTotalPrice = [...oldTotalPrice, { currentProductId, price }];
+			// setPokemonData((oldPokemon) => {
+			// 	oldPokemon = [...oldPokemon, getUrl.data];
+			// 	const uniqueState = [
+			// 		...new Map(oldPokemon.map((p) => [p.id, p])).values()
+			// 	];
+			// 	return uniqueState;
+			// });
 
-			const uniquePrice = oldTotalPrice.filter(
-				(value, index, self) =>
-					index === self.findIndex((t) => t.productId === value.productId)
-			);
-			console.log(uniquePrice);
+			// VERSION 1 but getting the first index
+			// const newTotalPrice = [...oldTotalPrice, { productId, price }];
 
-			// return oldTotalPrice;
+			// const uniquePrice = newTotalPrice.filter((obj, index, self) => {
+			// 	console.log(obj.productId);
+			// 	return index === self.findIndex((t) => t.productId === obj.productId);
+			// });
+
+			// return uniquePrice;
+
+			// VERSION 2 testing
+			oldTotalPrice = [...oldTotalPrice, { productId, price }];
+
+			const uniqueState = [
+				...new Map(oldTotalPrice.map((p) => [p.productId, p])).values()
+			];
+
+			console.log(uniqueState);
 		});
 	}
 
