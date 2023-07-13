@@ -20,17 +20,46 @@ export default function RootLayout({ productTarget }) {
 	const cartRef = useClickOutside(() => setIsShow(false));
 
 	const storeTotalPrice = [];
-	const [totalPrice, setTotalPrice] = useState(storeTotalPrice);
+	const [totalPrice, setTotalPrice] = useState(storeTotalPrice || []);
 
 	/*
-		remove the duplicate id from array
-		return only the result of new unique array
-		working but it will only result the first element. 
-		the goal is to get the last array
+		DONE remove the duplicate id from array
+		DONE return only the result of new unique array
+		DONE working but it will only result the first element. 
+		DONE the goal is to get the last array
+		DONE testing use findLastIndex instead of findIndex
+		if returning the Obj.reduce it will only getting prevState is not iterable
 	*/
 
 	function getCurrentPrices(price, productId) {
 		storeTotalPrice.push(price);
+
+		setTotalPrice((oldTotalPrice) => {
+			// VERSION 1
+			const testMap = [...oldTotalPrice, { productId, price }];
+			const uniquePrice = testMap.filter((obj, index, self) => {
+				return (
+					index === self.findLastIndex((t) => t.productId === obj.productId)
+				);
+			});
+			const testReduce = uniquePrice.reduce((acc, resultAmount) => {
+				return acc + resultAmount.price;
+			}, 0);
+
+			const convertNum = [Number(testReduce.toFixed(2))];
+			console.log(convertNum === [NaN]);
+
+			return convertNum;
+
+			// ============== VERSION 2 testing ==============
+			// oldTotalPrice = [...oldTotalPrice, { productId, price }];
+
+			// const uniqueState = [
+			// 	...new Map(oldTotalPrice.map((p) => [p.productId, p])).values()
+			// ];
+
+			// console.log(uniqueState);
+		});
 
 		// version 1
 		// return setTotalPrice((prevPrice) => [...prevPrice, { price }]);
@@ -45,36 +74,9 @@ export default function RootLayout({ productTarget }) {
 		// 		}
 		// 	});
 		// });
-
-		setTotalPrice((oldTotalPrice) => {
-			// setPokemonData((oldPokemon) => {
-			// 	oldPokemon = [...oldPokemon, getUrl.data];
-			// 	const uniqueState = [
-			// 		...new Map(oldPokemon.map((p) => [p.id, p])).values()
-			// 	];
-			// 	return uniqueState;
-			// });
-
-			// VERSION 1 but getting the first index
-			// const newTotalPrice = [...oldTotalPrice, { productId, price }];
-
-			// const uniquePrice = newTotalPrice.filter((obj, index, self) => {
-			// 	console.log(obj.productId);
-			// 	return index === self.findIndex((t) => t.productId === obj.productId);
-			// });
-
-			// return uniquePrice;
-
-			// VERSION 2 testing
-			oldTotalPrice = [...oldTotalPrice, { productId, price }];
-
-			const uniqueState = [
-				...new Map(oldTotalPrice.map((p) => [p.productId, p])).values()
-			];
-
-			console.log(uniqueState);
-		});
 	}
+
+	// console.log(totalPrice);
 
 	// const [currentCount, setCurrentCount] = useState([]);
 	// const [currentPrice, setCurrentPrice] = useState(productTotalPrice || []);

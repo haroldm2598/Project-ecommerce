@@ -11,8 +11,6 @@ export default function Card(props) {
 		price,
 		getProductTarget,
 		isCount,
-		// totalPrice,
-		// setTotalPrice,
 		getCurrentPrices
 	} = props;
 
@@ -30,19 +28,11 @@ export default function Card(props) {
 		setCurrentPrice((oldPrice) => {
 			return currentCount <= 1 ? oldPrice : oldPrice - price;
 		});
-		// setTotalPrice({
-		// 	...totalPrice,
-		// 	currentPrice
-		// });
 	}
 
 	function IncrementPrice() {
 		setCurrentCount((oldCount) => oldCount + 1);
 		setCurrentPrice((oldPrice) => oldPrice + price);
-		// setTotalPrice({
-		// 	...totalPrice,
-		// 	currentPrice
-		// });
 		getCurrentPrices(currentPrice, productId);
 	}
 
