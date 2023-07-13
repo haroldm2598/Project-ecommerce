@@ -20,7 +20,7 @@ export default function RootLayout({ productTarget }) {
 	const cartRef = useClickOutside(() => setIsShow(false));
 
 	const storeTotalPrice = [];
-	const [totalPrice, setTotalPrice] = useState(storeTotalPrice || []);
+	const [totalPrice, setTotalPrice] = useState(storeTotalPrice);
 
 	/*
 		DONE remove the duplicate id from array
@@ -42,12 +42,12 @@ export default function RootLayout({ productTarget }) {
 					index === self.findLastIndex((t) => t.productId === obj.productId)
 				);
 			});
+
 			const testReduce = uniquePrice.reduce((acc, resultAmount) => {
 				return acc + resultAmount.price;
 			}, 0);
 
-			const convertNum = [Number(testReduce.toFixed(2))];
-			console.log(convertNum === [NaN]);
+			const convertNum = Number.parseFloat(testReduce).toFixed(2);
 
 			return convertNum;
 

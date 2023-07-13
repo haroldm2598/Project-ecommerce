@@ -17,7 +17,7 @@ import '../assets/styles/main.scss';
 function CartContainer({
 	isShow,
 	// productTotalPrice,
-	// totalPrice,
+	totalPrice,
 	// setTotalPrice,
 	children
 }) {
@@ -46,8 +46,7 @@ function CartContainer({
 					<div className='grid grid-cols-1 grid-rows-2'>
 						<div className='flex justify-between'>
 							<h3>Total Amount</h3>
-							{/* <h3>{totalPrice}</h3> */}
-							<h3>Total Price here</h3>
+							<h3>{totalPrice}</h3>
 						</div>
 						<button className='btn'>Checkout</button>
 					</div>
