@@ -28,12 +28,13 @@ export default function Card(props) {
 		setCurrentPrice((oldPrice) => {
 			return currentCount <= 1 ? oldPrice : oldPrice - price;
 		});
+		getCurrentPrices(price, currentPrice, productId);
 	};
 
 	const IncrementPrice = () => {
 		setCurrentCount((oldCount) => oldCount + 1);
 		setCurrentPrice((oldPrice) => oldPrice + price);
-		getCurrentPrices(currentPrice, productId);
+		getCurrentPrices(price, currentPrice, productId);
 	};
 	return (
 		<>

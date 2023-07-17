@@ -34,11 +34,12 @@ export default function RootLayout({ productTarget }) {
 		https://stackoverflow.com/questions/74191375/nan-error-in-react-when-im-trying-to-use-the-usestate-hook-in-different-compone
 	*/
 
-	const getCurrentPrices = (price, productId) => {
+	const getCurrentPrices = (defaultPrice, totalPrice, productId) => {
 		// storeTotalPrice.push(price);
 
 		setTotalPrice((oldTotalPrice) => {
-			// Original Version ONLY RESULTING TO NaN
+			// ============== Original Version (beta testing) ==============
+			// - ONLY RESULTING TO NaN
 			// const priceMap = [...oldTotalPrice, { productId, price }];
 			// const uniquePrice = priceMap.filter((obj, index, self) => {
 			// 	return (
@@ -52,9 +53,8 @@ export default function RootLayout({ productTarget }) {
 
 			// return convertNum;
 
-			// ============== VERSION 1 testing ==============
-			console.log(price);
-			oldTotalPrice = [...oldTotalPrice, { productId, price }];
+			// ============== Fix Version (beta testing) ==============
+			oldTotalPrice = [...oldTotalPrice, { productId, totalPrice }];
 			return oldTotalPrice.filter((obj, index, self) => {
 				return (
 					index === self.findLastIndex((t) => t.productId === obj.productId)
