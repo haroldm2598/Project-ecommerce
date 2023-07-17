@@ -17,7 +17,7 @@ export default function Card(props) {
 	const [currentCount, setCurrentCount] = useState(1);
 	const [currentPrice, setCurrentPrice] = useState(price);
 
-	function decrementPrice() {
+	const decrementPrice = () => {
 		setCurrentCount((oldCount) => {
 			if (oldCount <= 1) {
 				return (oldCount = 1);
@@ -28,14 +28,13 @@ export default function Card(props) {
 		setCurrentPrice((oldPrice) => {
 			return currentCount <= 1 ? oldPrice : oldPrice - price;
 		});
-	}
+	};
 
-	function IncrementPrice() {
+	const IncrementPrice = () => {
 		setCurrentCount((oldCount) => oldCount + 1);
 		setCurrentPrice((oldPrice) => oldPrice + price);
 		getCurrentPrices(currentPrice, productId);
-	}
-
+	};
 	return (
 		<>
 			<div className='card transition duration-200 ease-out hover:ease-in hover:scale-110'>

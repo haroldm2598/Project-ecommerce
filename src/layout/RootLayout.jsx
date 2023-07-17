@@ -19,8 +19,8 @@ export default function RootLayout({ productTarget }) {
 	const [isShow, setIsShow] = useState(false);
 	const cartRef = useClickOutside(() => setIsShow(false));
 
-	const storeTotalPrice = [];
-	const [totalPrice, setTotalPrice] = useState(storeTotalPrice);
+	// const storeTotalPrice = [];
+	const [totalPrice, setTotalPrice] = useState([]);
 
 	/*
 		DONE remove the duplicate id from array
@@ -29,54 +29,39 @@ export default function RootLayout({ productTarget }) {
 		DONE the goal is to get the last array
 		DONE testing use findLastIndex instead of findIndex
 		if returning the Obj.reduce it will only getting prevState is not iterable
+		
+		useState different component resulting to NaN
+		https://stackoverflow.com/questions/74191375/nan-error-in-react-when-im-trying-to-use-the-usestate-hook-in-different-compone
 	*/
 
-	function getCurrentPrices(price, productId) {
-		storeTotalPrice.push(price);
+	const getCurrentPrices = (price, productId) => {
+		// storeTotalPrice.push(price);
 
 		setTotalPrice((oldTotalPrice) => {
-			// VERSION 1
-			const testMap = [...oldTotalPrice, { productId, price }];
-			const uniquePrice = testMap.filter((obj, index, self) => {
+			// Original Version ONLY RESULTING TO NaN
+			// const priceMap = [...oldTotalPrice, { productId, price }];
+			// const uniquePrice = priceMap.filter((obj, index, self) => {
+			// 	return (
+			// 		index === self.findLastIndex((t) => t.productId === obj.productId)
+			// 	);
+			// });
+			// const testReduce = uniquePrice.reduce((acc, resultAmount) => {
+			// 	return acc + resultAmount.price;
+			// }, 0);
+			// const convertNum = [Number(parseFloat(testReduce).toFixed(2))];
+
+			// return convertNum;
+
+			// ============== VERSION 1 testing ==============
+			console.log(price);
+			oldTotalPrice = [...oldTotalPrice, { productId, price }];
+			return oldTotalPrice.filter((obj, index, self) => {
 				return (
 					index === self.findLastIndex((t) => t.productId === obj.productId)
 				);
 			});
-
-			const testReduce = uniquePrice.reduce((acc, resultAmount) => {
-				return acc + resultAmount.price;
-			}, 0);
-
-			const convertNum = Number.parseFloat(testReduce).toFixed(2);
-
-			return convertNum;
-
-			// ============== VERSION 2 testing ==============
-			// oldTotalPrice = [...oldTotalPrice, { productId, price }];
-
-			// const uniqueState = [
-			// 	...new Map(oldTotalPrice.map((p) => [p.productId, p])).values()
-			// ];
-
-			// console.log(uniqueState);
 		});
-
-		// version 1
-		// return setTotalPrice((prevPrice) => [...prevPrice, { price }]);
-
-		// version 2
-		// setTotalPrice((prevPrice) => {
-		// 	return productTarget.map((item) => {
-		// 		if (item.productId === currentProductId) {
-		// 			return [item.price, price].reduce((acc, cur) => acc + cur, 0);
-		// 		} else {
-		// 			return [...prevPrice].filter((item) => typeof item === 'number');
-		// 		}
-		// 	});
-		// });
-	}
-
-	// console.log(totalPrice);
+	};
 
 	// const [currentCount, setCurrentCount] = useState([]);
 	// const [currentPrice, setCurrentPrice] = useState(productTotalPrice || []);
@@ -165,7 +150,6 @@ export default function RootLayout({ productTarget }) {
 						</span>
 						<CartContainer
 							isShow={isShow}
-							// productTotalPrice={productTotalPrice}
 							totalPrice={totalPrice}
 							setTotalPrice={setTotalPrice}
 						>
