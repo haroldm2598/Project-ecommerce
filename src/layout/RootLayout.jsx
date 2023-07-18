@@ -34,7 +34,7 @@ export default function RootLayout({ productTarget }) {
 		https://stackoverflow.com/questions/74191375/nan-error-in-react-when-im-trying-to-use-the-usestate-hook-in-different-compone
 	*/
 
-	const getCurrentPrices = (defaultPrice, totalPrice, productId) => {
+	const getCurrentPrices = (totalPrice, productId) => {
 		// storeTotalPrice.push(price);
 
 		setTotalPrice((oldTotalPrice) => {

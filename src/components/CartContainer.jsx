@@ -10,6 +10,7 @@ import '../assets/styles/main.scss';
    DONE - add maybe new object property of quantity and change it to state
    DONE - Array.reduce inorder to total the amount purchase
    PROCESSING - decrement Array.reduce inorder to total the amount purchase
+			- working but the decrement continues to deduct add some code to the bugs
    DONE - TotalPurchase problem encounter is when the default price is not add to the current one	
     - in order to achieve the handling event on total amount must insert the usestate in increment and decrement onClick 
     - make condition if already in the cart then remove the duplicate
