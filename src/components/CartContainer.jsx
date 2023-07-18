@@ -9,10 +9,10 @@ import '../assets/styles/main.scss';
    NOT WORKING - add new conditional rendering where requesting if price is given then price Product(Card) else currentPrice for CartContainer(Card)  
    DONE - add maybe new object property of quantity and change it to state
    DONE - Array.reduce inorder to total the amount purchase
-   PROCESSING - decrement Array.reduce inorder to total the amount purchase
-			- working but the decrement continues to deduct add some code to the bugs
+   DONE - decrement Array.reduce inorder to total the amount purchase
    DONE - TotalPurchase problem encounter is when the default price is not add to the current one	
-    - in order to achieve the handling event on total amount must insert the usestate in increment and decrement onClick 
+   NOT WORKING - in order to achieve the handling event on total amount must insert the usestate in increment and decrement onClick 
+   PROCESSING - totalPurchase set an initialStatement for the basic totalAmount
     - make condition if already in the cart then remove the duplicate
 	- remove item if accident or doesn't want the item
 	

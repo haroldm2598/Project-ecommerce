@@ -28,7 +28,10 @@ export default function Card(props) {
 		setCurrentPrice((oldPrice) => {
 			return currentCount <= 1 ? oldPrice : oldPrice - price;
 		});
-		getCurrentPrices(currentPrice - price, productId);
+		getCurrentPrices(
+			currentCount <= 1 ? currentPrice : currentPrice - price,
+			productId
+		);
 	};
 
 	const IncrementPrice = () => {
