@@ -12,49 +12,13 @@ import Card from '../components/Card';
 import useClickOutside from '../hooks/useClickOutside';
 
 export default function RootLayout({ productTarget }) {
-	// const productTotalPrice = productTarget.map((item) => {
-	// 	return item.price;
-	// });
-
 	const [isShow, setIsShow] = useState(false);
 	const cartRef = useClickOutside(() => setIsShow(false));
-
-	// const storeTotalPrice = [];
 	const [totalPrice, setTotalPrice] = useState([]);
 
-	/*
-		DONE remove the duplicate id from array
-		DONE return only the result of new unique array
-		DONE working but it will only result the first element. 
-		DONE the goal is to get the last array
-		DONE testing use findLastIndex instead of findIndex
-		if returning the Obj.reduce it will only getting prevState is not iterable
-		
-		useState different component resulting to NaN
-		https://stackoverflow.com/questions/74191375/nan-error-in-react-when-im-trying-to-use-the-usestate-hook-in-different-compone
-	*/
-
-	const getCurrentPrices = (totalPrice, productId) => {
-		// storeTotalPrice.push(price);
-
+	const getCurrentPrices = (totalPrices, productId) => {
 		setTotalPrice((oldTotalPrice) => {
-			// ============== Original Version (beta testing) ==============
-			// - ONLY RESULTING TO NaN
-			// const priceMap = [...oldTotalPrice, { productId, price }];
-			// const uniquePrice = priceMap.filter((obj, index, self) => {
-			// 	return (
-			// 		index === self.findLastIndex((t) => t.productId === obj.productId)
-			// 	);
-			// });
-			// const testReduce = uniquePrice.reduce((acc, resultAmount) => {
-			// 	return acc + resultAmount.price;
-			// }, 0);
-			// const convertNum = [Number(parseFloat(testReduce).toFixed(2))];
-
-			// return convertNum;
-
-			// ============== Fix Version (beta testing) ==============
-			oldTotalPrice = [...oldTotalPrice, { productId, totalPrice }];
+			oldTotalPrice = [...oldTotalPrice, { productId, totalPrices }];
 			return oldTotalPrice.filter((obj, index, self) => {
 				return (
 					index === self.findLastIndex((t) => t.productId === obj.productId)
@@ -62,6 +26,10 @@ export default function RootLayout({ productTarget }) {
 			});
 		});
 	};
+
+	function handleShow() {
+		setIsShow((oldState) => !oldState);
+	}
 
 	// const [currentCount, setCurrentCount] = useState([]);
 	// const [currentPrice, setCurrentPrice] = useState(productTotalPrice || []);
@@ -105,10 +73,6 @@ export default function RootLayout({ productTarget }) {
 	// 	});
 	// }
 
-	function handleShow() {
-		setIsShow((oldState) => !oldState);
-	}
-
 	const productTargetMap = productTarget.map((item) => (
 		<Card
 			key={item.productId}
@@ -118,8 +82,6 @@ export default function RootLayout({ productTarget }) {
 			price={item.price}
 			quantity={item.quantity}
 			isCount={true}
-			totalPrice={totalPrice}
-			setTotalPrice={setTotalPrice}
 			getCurrentPrices={getCurrentPrices}
 		/>
 	));

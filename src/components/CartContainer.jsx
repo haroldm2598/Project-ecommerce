@@ -1,5 +1,4 @@
 import '../assets/styles/main.scss';
-// import { useState } from 'react';
 /*
    DONE - how can i pass the data coming from Product Page then to CartContainer
    DONE - Add increment and decrement button
@@ -12,24 +11,14 @@ import '../assets/styles/main.scss';
    DONE - decrement Array.reduce inorder to total the amount purchase
    DONE - TotalPurchase problem encounter is when the default price is not add to the current one	
    NOT WORKING - in order to achieve the handling event on total amount must insert the usestate in increment and decrement onClick 
-   PROCESSING - totalPurchase set an initialStatement for the basic totalAmount
+   NOT WORKING - totalPurchase set an initialStatement for the basic totalAmount
     - make condition if already in the cart then remove the duplicate
 	- remove item if accident or doesn't want the item
-	
 */
 
 function CartContainer({ isShow, totalPrice, children }) {
-	// function updateTotalAmount() {
-	// 	setTotalPrice(
-	// 		productTotalPrice.reduce(
-	// 			(accumulator, currentValue) => accumulator + currentValue,
-	// 			0
-	// 		)
-	// 	);
-	// }
-
 	const totalPurchase = totalPrice
-		.map((item) => item.totalPrice)
+		.map((item) => item?.totalPrices)
 		.reduce((acc, resultAmount) => {
 			return acc + resultAmount;
 		}, 0)

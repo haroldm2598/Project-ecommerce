@@ -39,6 +39,7 @@ export default function Card(props) {
 		setCurrentPrice((oldPrice) => oldPrice + price);
 		getCurrentPrices(currentPrice + price, productId);
 	};
+
 	return (
 		<>
 			<div className='card transition duration-200 ease-out hover:ease-in hover:scale-110'>
@@ -51,7 +52,6 @@ export default function Card(props) {
 					<div className='p-4 h-36 flex flex-col'>
 						<h3 className='flex-1 text-base font-medium'>{title}</h3>
 						<div className=' flex justify-between items-center'>
-							{/* {price ? <p>${price}</p> : <p>${currentPrice}</p>} */}
 							<p>${currentPrice.toFixed(2)}</p>
 							{getProductTarget && (
 								<span
