@@ -17,18 +17,18 @@ import Contact from './pages/Contact';
 // Layout
 import RootLayout from './layout/RootLayout';
 
-const url = 'https://fakestoreapi.com/products?limit=12';
+// const url = 'https://fakestoreapi.com/products?limit=12';
 
 function App() {
-	// const [currentUrl, setCurrentUrl] = useState(
-	// 	'https://fakestoreapi.com/products?limit=12'
-	// );
+	const [currentUrl, setCurrentUrl] = useState(
+		'https://fakestoreapi.com/products?limit=12'
+	);
 	const [productData, setProductData] = useState([]);
 	const [productTarget, setProductTarget] = useState([]);
 
 	const fetchData = async () => {
 		try {
-			const response = await axios.get(url);
+			const response = await axios.get(currentUrl);
 			setProductData(response.data);
 		} catch (e) {
 			console.log(e);
@@ -37,18 +37,32 @@ function App() {
 
 	useEffect(() => {
 		fetchData();
-	}, []);
+	}, [currentUrl]);
 
 	function getProductTarget(image, title, price) {
-		setProductTarget((oldItem) => [
-			...oldItem,
-			{ productId: nanoid(), image, title, price, quantity: 1 }
-		]);
+		setProductTarget((oldItem) => {
+			oldItem = [
+				...oldItem,
+				{ productId: nanoid(), image, title, price, quantity: 1 }
+			];
+
+			return oldItem.filter((obj, index, self) => {
+				return index === self.findIndex((t) => t.title === obj.title);
+			});
+		});
 	}
 
 	const router = createBrowserRouter(
 		createRoutesFromElements(
-			<Route path='/' element={<RootLayout productTarget={productTarget} />}>
+			<Route
+				path='/'
+				element={
+					<RootLayout
+						productTarget={productTarget}
+						setProductTarget={setProductTarget}
+					/>
+				}
+			>
 				<Route index element={<Home />} />
 				<Route
 					path='Product'

@@ -6,7 +6,6 @@ import Card from '../components/Card';
 import { Link } from 'react-router-dom';
 
 export default function Home() {
-	// const [url, setUrl] = useState('https://fakestoreapi.com/products?limit=4');
 	const [fakeStoreData, setFakeStoreData] = useState([]);
 
 	useEffect(() => {
@@ -31,7 +30,7 @@ export default function Home() {
 	return (
 		<>
 			<section className='h-auto px-10 py-14 homeContainer'>
-				<div className='flex flex-row justify-center items-center'>
+				<div className='flex flex-col md:flex-row lg:flex-row justify-center items-center '>
 					<div className='grow shrink basis-auto w-56 text-center'>
 						<h1 className='mb-6 px-10 text-6xl font-semibold'>
 							An exclusive and unique brands
@@ -42,7 +41,7 @@ export default function Home() {
 							</button>
 						</Link>
 					</div>
-					<div className='grow shrink basis-auto w-64 h-96 mx-5 rounded-2xl overflow-hidden'>
+					<div className='grow shrink basis-auto sm:w-full md:w-64 lg:w-64 h-96 mx-5 mt-10 md:mt-0 lg:rounded-2xl sm:rounded-none overflow-hidden'>
 						<img
 							src={homePageImg}
 							alt='homepage image'
@@ -52,7 +51,7 @@ export default function Home() {
 				</div>
 				<div className='featureContainer mt-20'>
 					<h1 className='text-4xl font-semibold'>Features</h1>
-					<div className='my-10 grid grid-cols-4 gap-10'>
+					<div className='my-10 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 justify-items-center'>
 						{fakeStoreDataMap}
 					</div>
 				</div>

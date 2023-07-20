@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaShoppingCart } from 'react-icons/fa';
+import { FaShoppingCart, FaTrash } from 'react-icons/fa';
 
 import '../assets/styles/main.scss';
 
@@ -11,7 +11,8 @@ export default function Card(props) {
 		price,
 		getProductTarget,
 		isCount,
-		getCurrentPrices
+		getCurrentPrices,
+		deleteCart
 	} = props;
 
 	const [currentCount, setCurrentCount] = useState(1);
@@ -55,7 +56,7 @@ export default function Card(props) {
 							<p>${currentPrice.toFixed(2)}</p>
 							{getProductTarget && (
 								<span
-									className=' cursor-pointer'
+									className='cursor-pointer'
 									onClick={() => getProductTarget(image, title, price)}
 								>
 									<FaShoppingCart />
@@ -64,6 +65,12 @@ export default function Card(props) {
 
 							{isCount && (
 								<>
+									<span
+										className='cursor-pointer'
+										onClick={(event) => deleteCart(event, productId)}
+									>
+										<FaTrash />
+									</span>
 									<button onClick={decrementPrice}>-</button>
 									<h3>{currentCount}</h3>
 									<button onClick={IncrementPrice}>+</button>

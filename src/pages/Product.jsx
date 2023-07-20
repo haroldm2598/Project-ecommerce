@@ -1,10 +1,6 @@
-// 'https://fakestoreapi.com/products?limit=12'
-// import { useEffect, useState } from 'react';
 import '../assets/styles/main.scss';
 
 import Card from '../components/Card';
-// import axios from 'axios';
-
 /*
 	Challenge for the Product
 	- Try to use image transform scale in order to fix zoom in issue for the image cards
@@ -19,31 +15,6 @@ import Card from '../components/Card';
 */
 
 export default function Product({ productData, getProductTarget }) {
-	// const [currentUrl, setCurrentUrl] = useState(
-	// 	'https://fakestoreapi.com/products?limit=12'
-	// );
-	// const [productData, setProductData] = useState([]);
-	// const [productTarget, setProductTarget] = useState([]);
-
-	// useEffect(() => {
-	// 	const fetchData = async () => {
-	// 		try {
-	// 			const response = await axios.get(currentUrl);
-	// 			setProductData(response.data);
-	// 		} catch (e) {
-	// 			console.log(e);
-	// 		}
-	// 	};
-
-	// 	fetchData();
-	// }, [currentUrl]);
-
-	// function getProductTarget(image, title, price) {
-	// 	setProductTarget((oldItem) => [...oldItem, { image, title, price }]);
-	// }
-
-	// console.log(productTarget);
-
 	const productDataMap = productData.map((item) => (
 		<Card
 			key={item.id}

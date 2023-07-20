@@ -12,8 +12,8 @@ import '../assets/styles/main.scss';
    DONE - TotalPurchase problem encounter is when the default price is not add to the current one	
    NOT WORKING - in order to achieve the handling event on total amount must insert the usestate in increment and decrement onClick 
    NOT WORKING - totalPurchase set an initialStatement for the basic totalAmount
-    - make condition if already in the cart then remove the duplicate
-	- remove item if accident or doesn't want the item
+   DONE - make condition if already in the cart then remove the duplicate
+   DONE - remove item if accident or doesn't want the item
 */
 
 function CartContainer({ isShow, totalPrice, children }) {

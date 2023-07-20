@@ -11,7 +11,7 @@ import Card from '../components/Card';
 // HOOKS
 import useClickOutside from '../hooks/useClickOutside';
 
-export default function RootLayout({ productTarget }) {
+export default function RootLayout({ productTarget, setProductTarget }) {
 	const [isShow, setIsShow] = useState(false);
 	const cartRef = useClickOutside(() => setIsShow(false));
 	const [totalPrice, setTotalPrice] = useState([]);
@@ -26,6 +26,15 @@ export default function RootLayout({ productTarget }) {
 			});
 		});
 	};
+
+	function deleteCart(event, productId) {
+		event.preventDefault();
+		setProductTarget(
+			productTarget.filter((item) => item.productId !== productId)
+		);
+
+		setTotalPrice(totalPrice.filter((item) => item.productId !== productId));
+	}
 
 	function handleShow() {
 		setIsShow((oldState) => !oldState);
@@ -83,6 +92,7 @@ export default function RootLayout({ productTarget }) {
 			quantity={item.quantity}
 			isCount={true}
 			getCurrentPrices={getCurrentPrices}
+			deleteCart={deleteCart}
 		/>
 	));
 
