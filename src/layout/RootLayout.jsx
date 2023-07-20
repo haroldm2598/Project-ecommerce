@@ -11,6 +11,11 @@ import Card from '../components/Card';
 // HOOKS
 import useClickOutside from '../hooks/useClickOutside';
 
+// TASKS
+// - insure that navbar is reponsive with the correct approach
+// - add react-icons of hamburger menu
+// - learn the proper hidden not to eat the space for the other elements
+
 export default function RootLayout({ productTarget, setProductTarget }) {
 	const [isShow, setIsShow] = useState(false);
 	const cartRef = useClickOutside(() => setIsShow(false));

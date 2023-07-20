@@ -31,8 +31,8 @@ export default function Home() {
 		<>
 			<section className='h-auto px-10 py-14 homeContainer'>
 				<div className='flex flex-col md:flex-row lg:flex-row justify-center items-center '>
-					<div className='grow shrink basis-auto w-56 text-center'>
-						<h1 className='mb-6 px-10 text-6xl font-semibold'>
+					<div className='grow shrink basis-auto w-full md:w-56 text-center'>
+						<h1 className='mb-6 px-0 md:px-10 text-4xl md:text-6xl font-semibold'>
 							An exclusive and unique brands
 						</h1>
 						<Link to='/Product'>
@@ -41,7 +41,7 @@ export default function Home() {
 							</button>
 						</Link>
 					</div>
-					<div className='grow shrink basis-auto sm:w-full md:w-64 lg:w-64 h-96 mx-5 mt-10 md:mt-0 lg:rounded-2xl sm:rounded-none overflow-hidden'>
+					<div className='grow shrink basis-auto w-full md:w-64 h-96 mx-5 mt-10 md:mt-0 md:rounded-2xl sm:rounded-none overflow-hidden'>
 						<img
 							src={homePageImg}
 							alt='homepage image'
