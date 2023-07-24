@@ -12,6 +12,37 @@
 	.btn {
 		@apply text-white bg-darkBlue100 hover:bg-lightBlue font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2;
 	}
+
+	.navbar {
+		@apply h-20 px-10 flex flex-wrap flex-row justify-between items-center font-bold;
+
+		&__logo {
+			@apply grow shrink text-4xl;
+		}
+
+		&__navList {
+			@apply grow shrink basis-96 bg-white flex flex-row;
+		}
+		// &__navList {
+		// 	@apply grow shrink basis-96 hidden flex-col items-center justify-center bg-white md:flex md:flex-row md:justify-start;
+		// }
+	}
+
+	@media (max-width: 768px) {
+		.navbar {
+			&__navList {
+				@apply flex flex-col items-center justify-center bg-white absolute top-20 right-0 w-full h-72 overflow-hidden;
+			}
+
+			.showNavbarActive {
+				@apply w-0;
+			}
+
+			.hideNavbar {
+				@apply hidden;
+			}
+		}
+	}
 }
 
 body {
@@ -21,6 +52,7 @@ body {
 }
 
 .navbarCart {
+	margin-top: 10px;
 	height: 45px;
 	width: 45px;
 	display: inline-block;
@@ -46,8 +78,6 @@ body {
 	min-width: 30rem;
 
 	opacity: 1;
-	// visibility: visible;
-	// transform: translateX(0%);
 	transition: all 500ms ease-in;
 }
 
@@ -59,6 +89,6 @@ body {
 	min-width: 20rem;
 
 	opacity: 0;
-	// visibility: hidden;
+	visibility: hidden;
 	transition: all 500ms ease-out;
 }

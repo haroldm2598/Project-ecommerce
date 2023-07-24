@@ -8,11 +8,9 @@ import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
 export default function Contact() {
 	return (
 		<>
-			<section className='h-auto px-20 py-14 flex flex-row gap-4 bg-lightBlue text-white'>
-				<div className='w-72 h-72 bg-darkBlue  grow shrink basis-auto'>
-					{/* <img src='' alt='' /> */}
-				</div>
-				<div className='w-72 py-10 px-20 grow shrink basis-auto'>
+			<section className='h-auto px-2 py-10 flex flex-col gap-4 items-center bg-lightBlue text-white sm:flex-row sm:px-20 sm:py-14'>
+				<div className='w-72 h-72 bg-darkBlue grow shrink basis-auto'></div>
+				<div className='w-72 p-0 sm:py-10 sm:px-20 grow shrink basis-auto'>
 					<h1 className='mb-4 text-2xl'>WHO WE ARE?</h1>
 					<p className='text-lg'>
 						Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum fuga
@@ -21,8 +19,8 @@ export default function Contact() {
 					</p>
 				</div>
 			</section>
-			<section className='h-96 px-20 py-14 bg-lightGray grid justify-center items-center'>
-				<div className='flex flex-row gap-20'>
+			<section className='h-auto px-20 py-14 bg-lightGray grid justify-center items-center'>
+				<div className='flex flex-col items-center gap-20 sm:flex-row pb-5'>
 					<FaGithub size={70} />
 					<FaInstagram size={70} />
 					<FaLinkedin size={70} />
