@@ -1,12 +1,11 @@
 import './assets/styles/main.scss';
 import { useState, useEffect } from 'react';
 import {
-	createBrowserRouter,
+	createHashRouter,
 	createRoutesFromElements,
 	Route,
 	RouterProvider
 } from 'react-router-dom';
-import axios from 'axios';
 import { nanoid } from 'nanoid';
 
 // Pages
@@ -17,27 +16,23 @@ import Contact from './pages/Contact';
 // Layout
 import RootLayout from './layout/RootLayout';
 
-// const url = 'https://fakestoreapi.com/products?limit=12';
+// Custom hooks
+import useFetch from './hooks/useFetch';
 
 function App() {
-	const [currentUrl, setCurrentUrl] = useState(
+	const { data, loading, error } = useFetch(
 		'https://fakestoreapi.com/products?limit=12'
 	);
+
 	const [productData, setProductData] = useState([]);
 	const [productTarget, setProductTarget] = useState([]);
 
-	const fetchData = async () => {
-		try {
-			const response = await axios.get(currentUrl);
-			setProductData(response.data);
-		} catch (e) {
-			console.log(e);
-		}
-	};
-
 	useEffect(() => {
-		fetchData();
-	}, [currentUrl]);
+		setProductData(data);
+	}, [data]);
+
+	if (loading) return <h1>LOADING!!!!</h1>;
+	if (error) console.log(error);
 
 	function getProductTarget(image, title, price) {
 		setProductTarget((oldItem) => {
@@ -52,7 +47,7 @@ function App() {
 		});
 	}
 
-	const router = createBrowserRouter(
+	const router = createHashRouter(
 		createRoutesFromElements(
 			<Route
 				path='/'
