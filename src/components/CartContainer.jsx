@@ -28,7 +28,7 @@ function CartContainer({ isShow, totalPrice, children }) {
 		<div
 			className={`${
 				isShow ? 'cartActive' : 'cartInActive'
-			} px-20 py-20 bg-white text-darkBlue flex flex-col gap-y-10`}
+			} px-20 py-20 bg-white text-darkBlue flex flex-col gap-y-10 `}
 		>
 			{children.length === 0 ? (
 				<h1>You cart is empty</h1>

@@ -110,15 +110,15 @@ export default function RootLayout({ productTarget, setProductTarget }) {
 					</h1>
 					<div className={` ${showNavbar ? 'showNavbarActive' : 'hideNavbar'}`}>
 						<div className='navbar__navList'>
-							<NavLink to='/' className='md:ml-10'>
+							<NavLink to='/' className='my-5 md:ml-5'>
 								Home
 							</NavLink>
 
-							<NavLink to='/Product' className='md:ml-10'>
+							<NavLink to='/Product' className='my-5 md:ml-10'>
 								Product
 							</NavLink>
 
-							<NavLink to='/Contact' className='md:ml-10'>
+							<NavLink to='/Contact' className='my-5 md:ml-10'>
 								Contact
 							</NavLink>
 						</div>

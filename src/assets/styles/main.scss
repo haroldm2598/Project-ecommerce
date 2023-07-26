@@ -14,14 +14,14 @@
 	}
 
 	.navbar {
-		@apply h-20 px-10 flex flex-wrap flex-row justify-between items-center font-bold;
+		@apply h-20 w-full px-10 flex flex-wrap flex-row justify-between items-center font-bold;
 
 		&__logo {
-			@apply grow shrink text-4xl;
+			@apply grow shrink w-10 text-4xl;
 		}
 
 		&__navList {
-			@apply grow shrink basis-96 bg-white flex flex-row;
+			@apply grow shrink bg-white flex flex-row md:mx-20;
 		}
 		// &__navList {
 		// 	@apply grow shrink basis-96 hidden flex-col items-center justify-center bg-white md:flex md:flex-row md:justify-start;
@@ -79,6 +79,11 @@ body {
 
 	opacity: 1;
 	transition: all 500ms ease-in;
+
+	@media (max-width: 764px) {
+		min-height: 20rem;
+		width: 100%;
+	}
 }
 
 .cartInActive {
