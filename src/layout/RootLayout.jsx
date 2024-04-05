@@ -103,7 +103,7 @@ export default function RootLayout({ productTarget, setProductTarget }) {
 
 	return (
 		<div className='rootLayout'>
-			<header>
+			<header className='shadow-md relative z-50'>
 				<nav className='navbar'>
 					<h1 className='navbar__logo'>
 						<Link to='/'>FakeStore</Link>
@@ -124,10 +124,8 @@ export default function RootLayout({ productTarget, setProductTarget }) {
 						</div>
 					</div>
 
-					<div
-						className='grow shrink text-center overflow-hidden'
-						ref={cartRef}
-					>
+					{/* meron siyang text center sa parent */}
+					<div className='grow shrink overflow-hidden' ref={cartRef}>
 						<span className='navbarCart' onClick={handleShow}>
 							<FaShoppingCart className='navbarCart__cart' />
 						</span>
@@ -147,7 +145,7 @@ export default function RootLayout({ productTarget, setProductTarget }) {
 				</nav>
 			</header>
 
-			<main>
+			<main className='relative z-20'>
 				<Outlet />
 			</main>
 		</div>

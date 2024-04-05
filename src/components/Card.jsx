@@ -44,16 +44,21 @@ export default function Card(props) {
 	return (
 		<>
 			<div className='card transition duration-200 ease-out hover:ease-in hover:scale-110'>
-				<img
-					src={image}
-					alt='homepage image'
-					className='w-full h-96 object-cover object-top'
-				/>
+				<div className='w-full h-72'>
+					<img
+						src={image}
+						alt='homepage image'
+						className='w-full h-full object-contain'
+						// w-full h-96 object-cover object-top without div
+					/>
+				</div>
 				{title && (
 					<div className='p-4 h-36 flex flex-col'>
-						<h3 className='flex-1 text-base font-medium'>{title}</h3>
-						<div className=' flex justify-between items-center'>
-							<p>${currentPrice.toFixed(2)}</p>
+						<h3 className='w-64 flex-1 text-black text-base font-medium'>
+							{title}
+						</h3>
+						<div className='flex justify-between items-center'>
+							<p className='text-black'>${currentPrice.toFixed(2)}</p>
 							{getProductTarget && (
 								<span
 									className='cursor-pointer'

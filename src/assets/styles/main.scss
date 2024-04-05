@@ -6,7 +6,8 @@
 
 @layer components {
 	.card {
-		@apply bg-lightBlue text-white w-80 min-h-[5rem] shadow-xl rounded-md overflow-hidden;
+		// original width is w-80
+		@apply bg-white w-80 xl:w-[22rem] min-h-[5rem] shadow-xl rounded-md overflow-hidden;
 	}
 
 	.btn {
@@ -52,14 +53,17 @@ body {
 }
 
 .navbarCart {
-	margin-top: 10px;
-	height: 45px;
-	width: 45px;
-	display: inline-block;
-	background-color: $semiLight-color;
-	border-radius: 50%;
+	// background-color: azure;
+	// margin-top: 10px;
+	// height: 45px;
+	// width: auto;
+	display: flex;
+	justify-content: flex-end;
+	// background-color: $semiLight-color;
+	// border-radius: 50%;
 
 	&__cart {
+		// text-align: right;
 		margin: 10px;
 		cursor: pointer;
 	}
