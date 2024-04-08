@@ -22,21 +22,38 @@ import useFetch from '../hooks/useFetch';
 
 export default function Product({ productData, getProductTarget }) {
 	const categoryBtn = [
-		{ name: 'All Products' },
-		{ name: "Women's", value: "women's clothing" },
-		{ name: "Men's", value: "men's clothing" },
-		{ name: 'Jewelery', value: 'jewelery' }
+		// {
+		// 	name: 'All Products',
+		// 	value: 'https://fakestoreapi.com/products?limit=50'
+		// },
+		{
+			name: "Women's",
+			value: "women's clothing"
+		},
+		{
+			name: "Men's",
+			value: "men's clothing"
+		},
+		{
+			name: 'Jewelery',
+			value: 'jewelery'
+		}
 	];
-	const [categorySort, setCategorySort] = useState([]);
-	const { data, loading, error } = useFetch(
+	const [categorySort, setCategorySort] = useState("women's clothing");
+	const { data } = useFetch(
 		`https://fakestoreapi.com/products/category/${categorySort}`
 	);
 
 	useEffect(() => {
 		console.log(data);
+		// try mo mag set up dine ng product
 	}, [data]);
 
-	const productDataMap = data.map((item) => (
+	const sortAllProduct = productData?.filter((item) => {
+		return item.category !== 'electronics';
+	});
+
+	const productDataMap = sortAllProduct.map((item) => (
 		<Card
 			key={item.id}
 			image={item.image}
@@ -46,7 +63,15 @@ export default function Product({ productData, getProductTarget }) {
 		/>
 	));
 
-	if (error) console.log(error);
+	const categoryMap = data?.map((item) => (
+		<Card
+			key={item.id}
+			image={item.image}
+			title={item.title}
+			price={item.price}
+			getProductTarget={getProductTarget}
+		/>
+	));
 
 	return (
 		<>
@@ -57,7 +82,7 @@ export default function Product({ productData, getProductTarget }) {
 						return (
 							<button
 								key={index}
-								className='lg:mt-4 px-10 py-1  border-redOrange hover:bg-redOrangeDark text-redOrange hover:text-white font-medium rounded-md transition duration-200 ease-out hover:ease-in border-2'
+								className='lg:mt-4 px-10 py-1  bg-white hover:bg-redOrangeDark text-redOrange hover:text-white font-medium rounded-md transition duration-200 ease-out hover:ease-in border-2 border-redOrange focus:bg-redOrange focus:text-white'
 								onClick={() => setCategorySort(item?.value)}
 							>
 								{item.name}
@@ -66,13 +91,9 @@ export default function Product({ productData, getProductTarget }) {
 					})}
 				</div>
 
-				{loading ? (
-					<h1>Loading all Products</h1>
-				) : (
-					<div className='mx-auto my-10 max-w-[80rem] grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-auto gap-10 justify-items-center'>
-						{productDataMap}
-					</div>
-				)}
+				<div className='mx-auto my-10 max-w-[80rem] grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-auto gap-10 justify-items-center'>
+					{productData ? productDataMap : data ? categoryMap : <h1>loading</h1>}
+				</div>
 			</section>
 		</>
 	);
