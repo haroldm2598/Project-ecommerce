@@ -7,7 +7,7 @@
 @layer components {
 	.card {
 		// original width is w-80
-		@apply bg-white w-80 xl:w-[22rem] min-h-[5rem] shadow-xl rounded-md overflow-hidden;
+		@apply bg-white w-60 md:w-80 xl:w-[22rem] min-h-[5rem] shadow-xl rounded-md overflow-hidden;
 	}
 
 	.btn {
@@ -78,7 +78,7 @@ body {
 	position: absolute;
 	right: 0;
 
-	min-height: 50rem;
+	min-height: 100%;
 	min-width: 30rem;
 
 	opacity: 1;
@@ -87,6 +87,10 @@ body {
 	@media (max-width: 764px) {
 		min-height: 20rem;
 		width: 100%;
+	}
+
+	@media (max-width: 425px) {
+		min-width: 10rem;
 	}
 }
 

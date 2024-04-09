@@ -28,7 +28,7 @@ function CartContainer({ isShow, totalPrice, children }) {
 		<div
 			className={`${
 				isShow ? 'cartActive' : 'cartInActive'
-			} px-20 py-20 bg-white text-darkBlue flex flex-col gap-y-10 `}
+			} px-2 lg:px-20 py-20 text-center bg-white text-darkBlue flex flex-col items-center gap-y-10 `}
 		>
 			{children.length === 0 ? (
 				<h1>You cart is empty</h1>
@@ -36,8 +36,8 @@ function CartContainer({ isShow, totalPrice, children }) {
 				<>
 					<h1>Testing Cart Center</h1>
 					{children}
-					<div className='grid grid-cols-1 grid-rows-2'>
-						<div className='flex justify-between'>
+					<div className=' grid grid-cols-1 grid-rows-2'>
+						<div className='flex justify-between text-sm md:text-base gap-2'>
 							<h3>Total Amount</h3>
 							<h3>{totalPurchase}</h3>
 						</div>
