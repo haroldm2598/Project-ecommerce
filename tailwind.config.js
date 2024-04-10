@@ -4,6 +4,8 @@ export default {
 	theme: {
 		colors: {
 			white: '#ffffff',
+			semiLightGray: '#DADADA',
+			semiDarkGray: '#F6F6F6',
 			lightGray: '#bfc0c0',
 			lightBlue: '#4f5d75',
 			darkBlue: '#2d3142',
@@ -15,5 +17,5 @@ export default {
 		},
 		extend: {}
 	},
-	plugins: []
+	plugins: [require('daisyui')]
 };

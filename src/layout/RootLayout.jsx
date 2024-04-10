@@ -5,16 +5,11 @@ import { Link, NavLink, Outlet } from 'react-router-dom';
 import { FaShoppingCart, FaHamburger } from 'react-icons/fa';
 
 // COMPONENTS
-import CartContainer from '../components/CartContainer';
 import Card from '../components/Card';
-
-// HOOKS
-import useClickOutside from '../hooks/useClickOutside';
+import Drawer from '../components/Drawer';
 
 export default function RootLayout({ productTarget, setProductTarget }) {
-	const [isShow, setIsShow] = useState(false);
 	const [showNavbar, setShowNavbar] = useState(false);
-	const cartRef = useClickOutside(() => setIsShow(false));
 	const [totalPrice, setTotalPrice] = useState([]);
 
 	const getCurrentPrices = (totalPrices, productId) => {
@@ -35,10 +30,6 @@ export default function RootLayout({ productTarget, setProductTarget }) {
 		);
 
 		setTotalPrice(totalPrice.filter((item) => item.productId !== productId));
-	}
-
-	function handleShow() {
-		setIsShow((oldState) => !oldState);
 	}
 
 	function handleShowNavbar() {
@@ -103,40 +94,42 @@ export default function RootLayout({ productTarget, setProductTarget }) {
 
 	return (
 		<div className='rootLayout'>
-			<header className='shadow-md relative z-50'>
-				<nav className='navbar'>
-					<h1 className='navbar__logo'>
+			<header className='shadow-md relative z-30'>
+				<nav className='navbarContainer'>
+					<h1 className='navbarContainer__logo'>
 						<Link to='/'>FakeStore</Link>
 					</h1>
 					<div className={` ${showNavbar ? 'showNavbarActive' : 'hideNavbar'}`}>
-						<div className='navbar__navList'>
-							<NavLink to='/' className='my-5 md:ml-5'>
+						<div className='navbarContainer__navList'>
+							<NavLink
+								to='/'
+								className='navbarContent__links  navbarContent__grow  my-5 md:ml-5'
+							>
 								Home
 							</NavLink>
 
-							<NavLink to='/Product' className='my-5 md:ml-10'>
+							<NavLink
+								to='/Product'
+								className='navbarContent__links  navbarContent__grow  my-5 md:ml-10'
+							>
 								Product
 							</NavLink>
 
-							<NavLink to='/Contact' className='my-5 md:ml-10'>
+							<NavLink
+								to='/Contact'
+								className='navbarContent__links  navbarContent__grow  my-5 md:ml-10'
+							>
 								Contact
 							</NavLink>
 						</div>
 					</div>
 
-					{/* meron siyang text center sa parent */}
-					<div className='grow shrink overflow-hidden' ref={cartRef}>
-						<span className='navbarCart' onClick={handleShow}>
-							<FaShoppingCart className='navbarCart__cart' />
-						</span>
-						<CartContainer
-							isShow={isShow}
-							totalPrice={totalPrice}
-							setTotalPrice={setTotalPrice}
-						>
-							{productTargetMap}
-						</CartContainer>
+					<div className='mr-2 md:mr-0 drawer-content grow shrink overflow-hidden flex justify-end'>
+						<label htmlFor='my-drawer' aria-label='open sidebar'>
+							<FaShoppingCart className='cursor-pointer' size={30} />
+						</label>
 					</div>
+
 					<button onClick={handleShowNavbar} className='md:hidden'>
 						<span>
 							<FaHamburger />
@@ -144,6 +137,12 @@ export default function RootLayout({ productTarget, setProductTarget }) {
 					</button>
 				</nav>
 			</header>
+
+			<Drawer
+				data={productTargetMap}
+				totalPrice={totalPrice}
+				setTotalPrice={setTotalPrice}
+			/>
 
 			<main className='relative z-20'>
 				<Outlet />

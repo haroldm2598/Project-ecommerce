@@ -53,7 +53,7 @@ export default function Card(props) {
 					/>
 				</div>
 				{title && (
-					<div className='p-4 h-36 flex flex-col'>
+					<div className='p-4 h-36 flex flex-col bg-semiDarkGray'>
 						<h3 className='w-64 flex-1 text-black text-base font-medium'>
 							{title}
 						</h3>

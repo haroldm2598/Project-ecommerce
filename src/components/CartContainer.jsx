@@ -16,7 +16,7 @@ import '../assets/styles/main.scss';
    DONE - remove item if accident or doesn't want the item
 */
 
-function CartContainer({ isShow, totalPrice, children }) {
+function CartContainer({ totalPrice, children }) {
 	const totalPurchase = totalPrice
 		.map((item) => item?.totalPrices)
 		.reduce((acc, resultAmount) => {
@@ -25,16 +25,12 @@ function CartContainer({ isShow, totalPrice, children }) {
 		.toFixed(2);
 
 	return (
-		<div
-			className={`${
-				isShow ? 'cartActive' : 'cartInActive'
-			} px-2 lg:px-20 py-20 text-center bg-white text-darkBlue flex flex-col items-center gap-y-10 `}
-		>
+		<div className='px-2 lg:px-20 py-20 text-center  text-darkBlue flex flex-col items-center gap-y-10'>
 			{children.length === 0 ? (
 				<h1>You cart is empty</h1>
 			) : (
 				<>
-					<h1>Testing Cart Center</h1>
+					<h1>Your Cart List</h1>
 					{children}
 					<div className=' grid grid-cols-1 grid-rows-2'>
 						<div className='flex justify-between text-sm md:text-base gap-2'>
